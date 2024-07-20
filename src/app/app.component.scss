@@ -1,0 +1,65 @@
+nav {
+  font-family: "Roboto", sans-serif;
+  box-shadow: 1px -1px 25px -3px rgba(0, 0, 0, 0.29);
+  -webkit-box-shadow: 1px -1px 25px -3px rgba(0, 0, 0, 0.29);
+  -moz-box-shadow: 1px -1px 25px -3px rgba(0, 0, 0, 0.29);
+
+  .container-fluid {
+    justify-content: space-around;
+  }
+  div {
+    form {
+      align-items: center;
+
+      .searchWrap {
+        display: flex;
+        align-items: center;
+        background-color: #ffffff;
+        border-radius: 3px;
+        padding: 3px;
+
+        svg {
+          width: 30px;
+          height: 30px;
+          cursor: pointer;
+        }
+
+        input {
+          outline: none;
+          box-shadow: none;
+          border: none;
+        }
+      }
+    }
+
+    .sideA {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      a {
+        text-decoration: none;
+        color: black;
+        font-size: 20px;
+        transition: 0.3s ease-in;
+      }
+
+      .authA:hover {
+        color: rgb(139, 139, 139);
+        transition: 0.3s ease-in;
+      }
+
+      .svgA {
+        transition: 0.3s ease-in;
+        svg {
+          width: 1.3rem;
+          height: 1.3rem;
+        }
+      }
+
+      .svgA:hover {
+        color: rgb(139, 139, 139);
+        transition: 0.3s ease-in;
+      }
+    }
+  }
+}
