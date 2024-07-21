@@ -1,1 +1,7 @@
-<p>main works!</p>
+<main>
+  <div class="wrapper" *ngFor="let product of displayProducts$ | async">
+    <h1>
+      {{ product.brand }}
+    </h1>
+  </div>
+</main>
