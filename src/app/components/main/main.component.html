@@ -1,7 +1,12 @@
 <main>
-  <div class="wrapper" *ngFor="let product of displayProducts$ | async">
-    <h1>
-      {{ product.brand }}
-    </h1>
+  <div *ngIf="displayProducts$ | async as display">
+    <div class="wrapper">
+      <section class="displaySection" *ngFor="let item of display.products">
+        <h1>{{ item._id }}</h1>
+        <h1>
+          {{ item.brand }}
+        </h1>
+      </section>
+    </div>
   </div>
 </main>

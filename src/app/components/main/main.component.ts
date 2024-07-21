@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { ProductsService } from '../../shared/services/products.service';
 import { Product, Products } from '../../shared';
 import { Observable } from 'rxjs';
@@ -9,18 +9,18 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './main.component.html',
-  styleUrl: './main.component.scss',
+  styleUrls: ['./main.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MainComponent  {
-  displayProducts$: Observable<Product>
+  displayProducts$: Observable<Products>
 
 
   constructor(private ProductsService: ProductsService){
-    this.displayProducts$ = ProductsService.getProducts(this.config.pageIndex)
+    this.displayProducts$ = this.ProductsService.getProducts(this.config.pageIndex)
   }
 
   config = {
-    pageIndex: 2,
+    pageIndex: 1,
   }
-
 }
