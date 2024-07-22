@@ -1,3 +1,10 @@
 main {
   padding-top: 10%;
+
+  .wrapper {
+    .carousel-inner {
+      width: 300px;
+      height: 200px;
+    }
+  }
 }

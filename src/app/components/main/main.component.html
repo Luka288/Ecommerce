@@ -1,12 +1,44 @@
 <main>
-  <div *ngIf="displayProducts$ | async as display">
+  <div class="test" *ngIf="displayProducts$ | async as constProduct">
+    <h1 *ngFor="let item of constProduct.products">
+      {{ item.title }}
+    </h1>
+  </div>
+  <div *ngIf="caruselProducts$ | async as display">
     <div class="wrapper">
-      <section class="displaySection" *ngFor="let item of display.products">
-        <h1>{{ item._id }}</h1>
-        <h1>
-          {{ item.brand }}
-        </h1>
-      </section>
+      <div
+        id="carouselExampleAutoplaying"
+        class="carousel slide"
+        data-bs-ride="carousel"
+      >
+        <div class="carousel-inner">
+          <div
+            class="carousel-item"
+            *ngFor="let item of display.products; let i = index"
+            [class.active]="i === 0"
+          >
+            <img [src]="item.thumbnail" class="d-block w-100" alt="..." />
+          </div>
+        </div>
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselExampleAutoplaying"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselExampleAutoplaying"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
     </div>
   </div>
 </main>
