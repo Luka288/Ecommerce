@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./main.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MainComponent  {
+export default class MainComponent  {
   displayProducts$: Observable<Products>
   caruselProducts$: Observable<Products>
 
@@ -26,5 +26,7 @@ export class MainComponent  {
     pageIndex: 1,
     pageSize: 5,
   }
+
+  
 
 }
