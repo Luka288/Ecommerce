@@ -41,6 +41,7 @@ export default class MainComponent implements OnInit  {
         this.config.pageIndex = this.pageIndexSubject.value;
         this.config.pageSize = this.pageSizeSubject.value;
         this.config.totalItems = res.total;
+        this.cdr.markForCheck()
         return res;
       })
     );
