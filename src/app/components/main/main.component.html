@@ -6,96 +6,53 @@
           <a href="">Phones</a>
           <a href="">Laptops</a>
         </div>
-        <!-- <div class="carusel">
-          <div
-            id="carouselExampleAutoplaying"
-            class="carousel slide"
-            data-bs-ride="carousel"
-            data-bs-interval="2000"
-          >
-            <div class="carousel-inner">
-              <div
-                class="carousel-item"
-                *ngFor="let item of display.products; let i = index"
-                [class.active]="i === 0"
-              >
-                <img
-                  [src]="item.thumbnail"
-                  class="d-block w-100"
-                  [alt]="item.title"
-                />
-              </div>
-            </div>
-            <button
-              class="carousel-control-prev"
-              type="button"
-              data-bs-target="#carouselExampleAutoplaying"
-              data-bs-slide="prev"
-            >
-              <span
-                class="carousel-control-prev-icon"
-                aria-hidden="true"
-              ></span>
-              <span class="visually-hidden">Previous</span>
-            </button>
-            <button
-              class="carousel-control-next"
-              type="button"
-              data-bs-target="#carouselExampleAutoplaying"
-              data-bs-slide="next"
-            >
-              <span
-                class="carousel-control-next-icon"
-                aria-hidden="true"
-              ></span>
-              <span class="visually-hidden">Next</span>
-            </button>
-          </div>
-        </div> -->
       </div>
     </div>
   </div>
   <section class="shopProducts" *ngIf="displayProducts$ | async as mainProduct">
-    <div class="productCard" *ngFor="let product of mainProduct.products">
-      <img [src]="product.thumbnail" [alt]="product.title" />
-      <h4 class="productPrice">
-        @if(product.price.discountPercentage){
-        <s>{{ product.price.beforeDiscount }}</s
-        ><span class="discounted">{{ product.price.current }}</span>
-        {{ product.price.currency }}
-        }@else {
-        {{ product.price.current }}{{ product.price.currency }}
-        }
-      </h4>
-      <p>
-        {{ product.title }}
-      </p>
-      <button class="cart">Add to cart</button>
-    </div>
-  </section>
-
-  <!-- <section class="discountedProducts">
-    <div
-      class="discountedSection"
-      *ngIf="displayProducts$ | async as discountedItems"
-    >
-      <div
-        class="discountedCard"
-        *ngFor="let product of discountedItems.products"
-      >
-        @if (product.price.discountPercentage) {
+    <div class="mainProducts">
+      <div class="productCard" *ngFor="let product of mainProduct.products">
         <img [src]="product.thumbnail" [alt]="product.title" />
         <h4 class="productPrice">
+          @if(product.price.discountPercentage){
           <s>{{ product.price.beforeDiscount }}</s
           ><span class="discounted">{{ product.price.current }}</span>
           {{ product.price.currency }}
+          }@else {
+          {{ product.price.current }}{{ product.price.currency }}
+          }
         </h4>
         <p>
           {{ product.title }}
         </p>
         <button class="cart">Add to cart</button>
-        }
       </div>
     </div>
-  </section> -->
+  </section>
+
+  <section class="discountedProducts">
+    <div
+      class="discountedSection"
+      *ngIf="displayProducts$ | async as discountedItems"
+    >
+      <div class="title">
+        <h1>Discounted Products</h1>
+      </div>
+      <div class="sectionCards">
+        <div
+          class="discountedCard"
+          *ngFor="let product of discountedItems.products"
+        >
+          <img [src]="product.thumbnail" [alt]="product.title" />
+          <h4 class="productPrice">
+            <s>{{ product.price.beforeDiscount }}</s>
+            <span class="discounted">{{ product.price.current }}</span>
+            {{ product.price.currency }}
+          </h4>
+          <p>{{ product.title }}</p>
+          <button class="cart">Add to cart</button>
+        </div>
+      </div>
+    </div>
+  </section>
 </main>
