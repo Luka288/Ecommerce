@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { ProductsService } from '../../shared/services/products.service';
 import { Product, Products } from '../../shared';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest, map, Observable, of, switchMap } from 'rxjs';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -12,21 +12,51 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./main.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export default class MainComponent  {
-  displayProducts$: Observable<Products>
+export default class MainComponent implements OnInit  {
+  displayProducts$: Observable<Products> = of({ products: {} } as Products);
   caruselProducts$: Observable<Products>
+  config = {
+    pageIndex: 1,
+    pageSize: 10,
+    totalItems: 0,
+  }
 
-
-  constructor(private ProductsService: ProductsService){
-    this.displayProducts$ = this.ProductsService.getProducts(this.config.pageIndex, this.config.pageSize)
+  constructor(private ProductsService: ProductsService, private cdr: ChangeDetectorRef){
     this.caruselProducts$ = this.ProductsService.getProducts(1, 4)
   }
 
-  config = {
-    pageIndex: 1,
-    pageSize: 5,
+  private pageIndexSubject = new BehaviorSubject<number>(this.config.pageIndex)
+  private pageSizeSubject = new BehaviorSubject<number>(this.config.pageSize)
+
+
+  ngOnInit(): void {
+    this.displayProducts$ = combineLatest([
+      this.pageIndexSubject,
+      this.pageSizeSubject,
+    ]).pipe(
+      switchMap(([pageIndex, pageSize]) =>
+        this.ProductsService.getProducts(pageIndex, pageSize)
+      ),
+      map(res => {
+        this.config.pageIndex = this.pageIndexSubject.value;
+        this.config.pageSize = this.pageSizeSubject.value;
+        this.config.totalItems = res.total;
+        return res;
+      })
+    );
   }
 
-  
+  onPageChange(pageIndex: number, event: MouseEvent): void{
+    event.preventDefault();
+    this.pageIndexSubject.next(pageIndex)
+  }
+
+  onPageSizeChange(pageSize: number): void{
+    this.pageSizeSubject.next(pageSize)
+  }
+
+  get totalPages(): number {
+    return Math.ceil(this.config.totalItems / this.config.pageSize);
+  }
 
 }
