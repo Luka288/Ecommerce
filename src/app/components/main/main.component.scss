@@ -165,3 +165,37 @@ main {
     }
   }
 }
+
+@media (max-width: 1024px) {
+  .discountedProducts {
+    .title {
+    }
+    .discountedSection {
+      .sectionCards {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+    }
+  }
+
+  .mainProducts {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+@media (max-width: 425px) {
+  .discountedProducts {
+    .title {
+    }
+    .discountedSection {
+      .sectionCards {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr) !important;
+      }
+    }
+  }
+
+  .mainProducts {
+    grid-template-columns: repeat(1, 1fr) !important;
+  }
+}
