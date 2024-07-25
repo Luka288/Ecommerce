@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { SingleProductService } from '../../shared/services/single-product.service';
 import { Products } from '../../shared';
+import { SingleProduct } from '../../shared/interface/singleProduct';
 
 @Component({
   selector: 'app-product-page',
@@ -15,20 +16,16 @@ export default class ProductPageComponent implements OnInit {
   private readonly singlePageProduct = inject(SingleProductService)
   private readonly route = inject(ActivatedRoute);
 
-  product: SingleProductInter[] | null = null;
+  display: SingleProduct | null = null;
 
   ngOnInit(): void {
-    this.route.params.subscribe((params) => {
-      const id = params['id'];
-      this.loadSingleProduct(id);
-      console.log(params);
-    });
-  }
-
-  loadSingleProduct(_id: string): void {
-    this.singlePageProduct.loadProduct(_id).subscribe((res: SingleProductService) => {
-      this.product = [res]
-      console.log(res);
+    this.route.paramMap.subscribe(params => {
+      const id = params.get('id');
+      if (id) {
+        this.singlePageProduct.loadProduct(id).subscribe((product) => {
+          this.display = product
+        });
+      }
     });
   }
 }
