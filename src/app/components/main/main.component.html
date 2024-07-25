@@ -1,5 +1,5 @@
 <main>
-  <div *ngIf="caruselProducts$ | async as display">
+  <div>
     <div class="upperContainer">
       <div class="wrapper">
         <div class="categories">
@@ -10,17 +10,14 @@
     </div>
   </div>
   <section class="discountedProducts">
-    <div
-      class="discountedSection"
-      *ngIf="caruselProducts$ | async as discountedItems"
-    >
+    <div class="discountedSection">
       <div class="title">
         <h1>Discounted Products</h1>
       </div>
       <div class="sectionCards">
         <div
           class="discountedCard"
-          *ngFor="let product of discountedItems.products"
+          *ngFor="let product of discounted?.products"
         >
           <img [src]="product.thumbnail" [alt]="product.title" />
           <h4 class="productPrice">
@@ -35,9 +32,9 @@
     </div>
   </section>
 
-  <section class="shopProducts" *ngIf="displayProducts$ | async as mainProduct">
+  <section class="shopProducts">
     <div class="mainProducts">
-      <div class="productCard" *ngFor="let product of mainProduct.products">
+      <div class="productCard" *ngFor="let product of display?.products">
         <img [src]="product.thumbnail" [alt]="product.title" />
         <h4 class="productPrice">
           @if(product.price.discountPercentage){
@@ -54,7 +51,16 @@
         <button class="cart">Add to cart</button>
       </div>
     </div>
-    <nav aria-label="Page navigation example">
+    <nav aria-label="page">
+      <ul class="pagination pagination-lg">
+        <li class="page-item active" aria-current="page">
+          <span class="page-link">1</span>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+      </ul>
+    </nav>
+    <!-- <nav aria-label="Page navigation example">
       <ul class="pagination">
         <li class="page-item" [class.disabled]="config.pageIndex === 1">
           <a
@@ -83,6 +89,12 @@
           >
         </li>
       </ul>
-    </nav>
+    </nav> -->
   </section>
 </main>
+
+<!-- <div class="main" *ngFor="let item of display!.products">
+  <h1>
+    {{ item.brand }}
+  </h1>
+</div> -->

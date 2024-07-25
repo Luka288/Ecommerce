@@ -12,7 +12,7 @@ export class ProductsService {
 
   private readonly everestPRODUCTS = apiURL;
 
-  getProducts(page_index: number, page_size: number): Observable<Products>{
+  getProducts(page_index: number, page_size: number){
     return this.http.get<Products>(`${this.everestPRODUCTS}/shop/products/all?page_index=${page_index}&page_size=${page_size}`)
   }
 
