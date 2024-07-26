@@ -1,10 +1,112 @@
 main {
   width: 100%;
-  height: 100%;
+  height: 100vh;
+  background-color: aliceblue;
+
   section {
-    width: 85%;
-    background-color: black;
-    color: white;
+    height: 100%;
+    padding-top: 5.5%;
+    display: flex;
+    justify-content: space-evenly;
+
+    .upperSide {
+      display: flex;
+      justify-content: center;
+
+      .item {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+        justify-content: center;
+        align-items: center;
+        height: 300px;
+
+        img {
+          width: 200px;
+          height: 350px;
+          object-fit: contain;
+        }
+
+        .infoWrap {
+          .descriptionStyle {
+            width: 320px;
+            font-size: 1.4em;
+          }
+        }
+
+        .imgContainer {
+          p.title {
+            font-size: 1.7em;
+          }
+
+          .carousel {
+            width: 500px;
+            height: 500px;
+            object-fit: contain;
+
+            img {
+              width: 500px;
+              height: 500px;
+              object-fit: contain;
+              border-radius: 15px;
+            }
+          }
+        }
+      }
+    }
+
+    section.purchase {
+      width: 500px;
+      height: 500px;
+      border: 1px solid black;
+      display: grid;
+      grid-template-columns: repeat(1, 0fr);
+
+      .topContainer {
+        display: flex;
+        justify-content: center;
+        width: 500px;
+        height: 300px;
+
+        ul {
+          width: 250px;
+          height: 55px;
+          li {
+            border: 1px solid black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            list-style: none;
+            background-color: #bd9b07;
+            cursor: pointer;
+            transition: 0.3s ease-in-out;
+
+            a {
+              text-decoration: none;
+              font-size: 26px;
+              text-transform: capitalize;
+              color: white;
+            }
+          }
+
+          li:hover {
+            background-color: #d8b415;
+            transition: 0.3s ease-in-out;
+          }
+        }
+      }
+
+      .bottomContainer {
+        margin: auto;
+        width: 450px;
+        height: 100%;
+
+        a {
+          text-decoration: none;
+          font-size: 18px;
+        }
+      }
+    }
   }
 
   .backArrow {
