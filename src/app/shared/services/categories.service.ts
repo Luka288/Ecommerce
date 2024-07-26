@@ -6,13 +6,13 @@ import { Products } from '../interface';
 @Injectable({
   providedIn: 'root'
 })
-export class ProductsService {
+export class CategoriesService {
   private readonly http = inject(HttpClient)
 
-  private readonly everestPRODUCTS = apiURL;
+  private readonly url = apiURL
 
-  getProducts(page_index: number, page_size: number){
-    return this.http.get<Products>(`${this.everestPRODUCTS}/shop/products/all?page_index=${page_index}&page_size=${page_size}`)
+  getCategories(catergory: number, pageSize: number){
+    return this.http.get<Products>(`${this.url}/shop/products/category/${catergory}?page_size=${pageSize}`)
   }
 
 }

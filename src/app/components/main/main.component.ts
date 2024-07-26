@@ -5,6 +5,7 @@ import { BehaviorSubject, combineLatest, map, Observable, of, retry, switchMap }
 import { CommonModule } from '@angular/common';
 
 import { RouterModule } from '@angular/router';
+import { CategoriesService } from '../../shared/services/categories.service';
 
 @Component({
   selector: 'app-main',
@@ -15,6 +16,11 @@ import { RouterModule } from '@angular/router';
 })
 export default class MainComponent implements OnInit  {
   private readonly httpRequest = inject(ProductsService)
+  private readonly categoryRequest = inject(CategoriesService)
+
+  display: Products | null = null;
+  discounted: Products | null = null;
+  categoryLaptop: Products | null = null;
 
   config = {
     pageIndex: 1,
@@ -22,14 +28,12 @@ export default class MainComponent implements OnInit  {
     totalItems: 0,
   }
 
-
   ngOnInit(): void {
     this.loadProducts(this.config.pageIndex, this.config.pageSize)
     this.forDiscountedProducts()
   }
 
-  display: Products | null = null;
-  discounted: Products | null = null;
+
 
   loadProducts(pageIndex: number, pageSize: number){
     this.httpRequest.getProducts(pageIndex, pageSize).subscribe((res) => {
@@ -50,8 +54,24 @@ export default class MainComponent implements OnInit  {
     this.loadProducts(pageIndex, this.config.pageSize)
   }
 
+  categoryPagination(page_index: number, event: MouseEvent): void{
+    event.preventDefault()
+    this.config.pageIndex = page_index
+    this.getCategory(page_index, this.config.pageSize)
+  }
+
   get totalPages(): number{
     return Math.ceil(this.config.totalItems / this.config.pageSize)
+  }
+
+
+  getCategory(category: number, page_size: number){
+    this.categoryRequest.getCategories(category, page_size).subscribe((res) => {
+      this.categoryLaptop = res
+      this.config.totalItems = res.total
+      console.log("იგზავნება კატეგორიის რექვესტი", res.products)
+    })
+
   }
 
 }
