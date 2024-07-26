@@ -50,53 +50,23 @@
           {{ product.title }}
         </p>
         <button class="cart">Add to cart</button>
-        <a routerLink="/product/id/{{ product._id }}">View Product</a>
+        <a routerLink="/product/id/{{ product._id }}" class="viewProduct"
+          >View Product</a
+        >
       </div>
     </div>
     <nav aria-label="page">
       <ul class="pagination pagination-lg">
-        <li class="page-item active" aria-current="page">
-          <span class="page-link">1</span>
+        <li
+          class="page-item active"
+          *ngFor="let page of [].constructor(totalPages); let i = index"
+          [class.active]="this.config.pageIndex === i + 1"
+        >
+          <a class="page-link" href="#" (click)="pageChange(i + 1, $event)">{{
+            i + 1
+          }}</a>
         </li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
       </ul>
     </nav>
-    <!-- <nav aria-label="Page navigation example">
-      <ul class="pagination">
-        <li class="page-item" [class.disabled]="config.pageIndex === 1">
-          <a
-            class="page-link"
-            (click)="onPageChange(config.pageIndex - 1, $event)"
-            >Previous</a
-          >
-        </li>
-        <li
-          class="page-item"
-          *ngFor="let page of [].constructor(totalPages); let i = index"
-          [class.active]="config.pageIndex === i + 1"
-        >
-          <a class="page-link" href="#" (click)="onPageChange(i + 1, $event)">
-            {{ i + 1 }}
-          </a>
-        </li>
-        <li
-          class="page-item"
-          [class.disabled]="config.pageIndex === totalPages"
-        >
-          <a
-            class="page-link"
-            (click)="onPageChange(config.pageIndex + 1, $event)"
-            >Next</a
-          >
-        </li>
-      </ul>
-    </nav> -->
   </section>
 </main>
-
-<!-- <div class="main" *ngFor="let item of display!.products">
-  <h1>
-    {{ item.brand }}
-  </h1>
-</div> -->
