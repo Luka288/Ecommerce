@@ -35,7 +35,7 @@ export default class MainComponent implements OnInit  {
     this.forDiscountedProducts()
   }
 
-
+//search funcrion still working on it
   searchFun(userSearch: string){
     const filteredProducts = this.search.filter(product =>
       product.title.toLowerCase().includes(userSearch.toLowerCase())
