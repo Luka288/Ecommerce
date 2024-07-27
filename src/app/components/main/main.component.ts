@@ -16,7 +16,7 @@ import { CategoriesService } from '../../shared/services/categories.service';
 export default class MainComponent implements OnInit  {
   private readonly httpRequest = inject(ProductsService)
   private readonly categoryRequest = inject(CategoriesService)
-  private readonly cdr = inject(ChangeDetectorRef)
+
 
   display: Products | null = null;
   discounted: Products | null = null;
