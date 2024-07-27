@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { ProductsService } from '../../shared/services/products.service';
-import { Product, Products } from '../../shared';
-import { BehaviorSubject, combineLatest, map, Observable, of, retry, switchMap } from 'rxjs';
+import { Products } from '../../shared';
 import { CommonModule } from '@angular/common';
 
 import { RouterModule } from '@angular/router';
@@ -17,12 +16,12 @@ import { CategoriesService } from '../../shared/services/categories.service';
 export default class MainComponent implements OnInit  {
   private readonly httpRequest = inject(ProductsService)
   private readonly categoryRequest = inject(CategoriesService)
+  private readonly cdr = inject(ChangeDetectorRef)
 
   display: Products | null = null;
   discounted: Products | null = null;
-  // categoryLaptop: Products | null = null;
-  isCategory: boolean = false;
   currentCategory: number | null = null;
+  isCategory: boolean = false;
 
   config = {
     pageIndex: 1,
@@ -53,35 +52,27 @@ export default class MainComponent implements OnInit  {
 
   pageChange(pageIndex: number, event: MouseEvent): void{
     event.preventDefault();
-    this.config.pageIndex = pageIndex
-    if(this.isCategory && this.currentCategory !== null){
-      this.getCategory(this.currentCategory, this.config.pageSize, pageIndex)
-    }else{
-      this.loadProducts(pageIndex, this.config.pageSize)
+    this.config.pageIndex = pageIndex;
+    if (this.isCategory && this.currentCategory !== null) {
+      this.getCategory(this.currentCategory, this.config.pageSize, pageIndex);
+    } else {
+      this.loadProducts(pageIndex, this.config.pageSize);
     }
   }
 
-  // categoryPagination(page_index: number, event: MouseEvent): void{
-  //   event.preventDefault()
-  //   this.config.pageIndex = page_index
-  //   this.getCategory(page_index, this.config.pageSize)
-  // }
 
-
-  getCategory(category: number, page_size: number, page_index: number): void{
+  getCategory(category: number, page_size: number, page_index: number = 1): void{
+    this.config.pageIndex = page_index;
     this.categoryRequest.getCategories(category, page_index, page_size).subscribe((res) => {
       this.isCategory = true;
       this.currentCategory = category;
       this.display = res;
       this.config.totalItems = res.total;
-      console.log("იგზავნება კატეგორიის რექვესტი", res.products)
-    })
-
+      page_index = 1;
+    });
   }
 
   get totalPages(): number {
     return Math.ceil(this.config.totalItems / this.config.pageSize);
   }
-
-
 }

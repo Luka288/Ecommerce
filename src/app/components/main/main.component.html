@@ -27,13 +27,10 @@
     <div class="upperContainer">
       <div class="wrapper">
         <div class="categories">
-          <a (click)="getCategory(2, 10, this.config.pageIndex)">Phones</a>
-          <a
-            (click)="
-              getCategory(1, this.config.pageSize, this.config.pageIndex)
-            "
-            >Laptops</a
-          >
+          <h1 class="categoryHeader">categories</h1>
+          <a (click)="loadProducts(1, this.config.pageSize)">Reset</a>
+          <a (click)="getCategory(2, this.config.pageSize, 1)">Phones</a>
+          <a (click)="getCategory(1, this.config.pageSize, 1)">Laptops</a>
         </div>
       </div>
     </div>
@@ -57,53 +54,20 @@
           >View Product</a
         >
       </div>
-      <!-- <div class="productCard" *ngFor="let product of display?.products">
-        <img [src]="product.thumbnail" [alt]="product.title" />
-        <h4 class="productPrice">
-          @if(product.price.discountPercentage){
-          <s>{{ product.price.beforeDiscount }}</s
-          ><span class="discounted">{{ product.price.current }}</span>
-          {{ product.price.currency }}
-          }@else {
-          {{ product.price.current }}{{ product.price.currency }}
-          }
-        </h4>
-        <p>
-          {{ product.title }}
-        </p>
-        <button class="cart">Add to cart</button>
-        <a routerLink="/product/id/{{ product._id }}" class="viewProduct"
-          >View Product</a
-        >
-      </div> -->
     </div>
-    <nav aria-label="page">
-      <!-- <ul class="pagination pagination-lg">
-        <li
-          class="page-item active"
-          *ngFor="let page of [].constructor(totalPages); let i = index"
-          [class.active]="this.config.pageIndex === i + 1"
-        >
-          <a
-            class="page-link"
-            href="#"
-            (click)="categoryPagination(i + 1, $event)"
-            >{{ i + 1 }}</a
-          >
-        </li>
-      </ul> -->
-      <ul class="pagination pagination-lg">
-        <li
-          class="page-item active"
-          *ngFor="let page of [].constructor(totalPages); let i = index"
-          [class.active]="this.config.pageIndex === i + 1"
-          [class.disabled]="this.config.totalItems === this.config.pageSize"
-        >
-          <a class="page-link" href="#" (click)="pageChange(i + 1, $event)">{{
-            i + 1
-          }}</a>
-        </li>
-      </ul>
-    </nav>
   </section>
+  <nav aria-label="page" class="paginator">
+    <ul class="pagination pagination-lg">
+      <li
+        class="page-item active"
+        *ngFor="let page of [].constructor(totalPages); let i = index"
+        [class.active]="this.config.pageIndex === i + 1"
+        [class.disabled]="this.config.totalItems === this.config.pageSize"
+      >
+        <a class="page-link" href="#" (click)="pageChange(i + 1, $event)">{{
+          i + 1
+        }}</a>
+      </li>
+    </ul>
+  </nav>
 </main>
