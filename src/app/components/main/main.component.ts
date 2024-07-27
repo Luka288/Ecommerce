@@ -71,7 +71,6 @@ export default class MainComponent implements OnInit  {
       page_index = 1;
     });
   }
-
   get totalPages(): number {
     return Math.ceil(this.config.totalItems / this.config.pageSize);
   }
