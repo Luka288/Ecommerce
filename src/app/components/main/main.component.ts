@@ -17,7 +17,6 @@ export default class MainComponent implements OnInit  {
   private readonly httpRequest = inject(ProductsService)
   private readonly categoryRequest = inject(CategoriesService)
 
-
   display: Products | null = null;
   discounted: Products | null = null;
   currentCategory: number | null = null;
