@@ -20,11 +20,13 @@ export default class MainComponent implements OnInit  {
 
   display: Products | null = null;
   discounted: Products | null = null;
-  categoryLaptop: Products | null = null;
+  // categoryLaptop: Products | null = null;
+  isCategory: boolean = false;
+  currentCategory: number | null = null;
 
   config = {
     pageIndex: 1,
-    pageSize: 10,
+    pageSize: 12,
     totalItems: 0,
   }
 
@@ -39,6 +41,7 @@ export default class MainComponent implements OnInit  {
     this.httpRequest.getProducts(pageIndex, pageSize).subscribe((res) => {
       this.display = res
       this.config.totalItems = res.total
+      this.isCategory= false
     })
   }
 
@@ -51,27 +54,34 @@ export default class MainComponent implements OnInit  {
   pageChange(pageIndex: number, event: MouseEvent): void{
     event.preventDefault();
     this.config.pageIndex = pageIndex
-    this.loadProducts(pageIndex, this.config.pageSize)
+    if(this.isCategory && this.currentCategory !== null){
+      this.getCategory(this.currentCategory, this.config.pageSize, pageIndex)
+    }else{
+      this.loadProducts(pageIndex, this.config.pageSize)
+    }
   }
 
-  categoryPagination(page_index: number, event: MouseEvent): void{
-    event.preventDefault()
-    this.config.pageIndex = page_index
-    this.getCategory(page_index, this.config.pageSize)
-  }
-
-  get totalPages(): number{
-    return Math.ceil(this.config.totalItems / this.config.pageSize)
-  }
+  // categoryPagination(page_index: number, event: MouseEvent): void{
+  //   event.preventDefault()
+  //   this.config.pageIndex = page_index
+  //   this.getCategory(page_index, this.config.pageSize)
+  // }
 
 
-  getCategory(category: number, page_size: number){
-    this.categoryRequest.getCategories(category, page_size).subscribe((res) => {
-      this.categoryLaptop = res
-      this.config.totalItems = res.total
+  getCategory(category: number, page_size: number, page_index: number): void{
+    this.categoryRequest.getCategories(category, page_index, page_size).subscribe((res) => {
+      this.isCategory = true;
+      this.currentCategory = category;
+      this.display = res;
+      this.config.totalItems = res.total;
       console.log("იგზავნება კატეგორიის რექვესტი", res.products)
     })
 
   }
+
+  get totalPages(): number {
+    return Math.ceil(this.config.totalItems / this.config.pageSize);
+  }
+
 
 }

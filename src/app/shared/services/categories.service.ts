@@ -11,8 +11,8 @@ export class CategoriesService {
 
   private readonly url = apiURL
 
-  getCategories(catergory: number, pageSize: number){
-    return this.http.get<Products>(`${this.url}/shop/products/category/${catergory}?page_size=${pageSize}`)
+  getCategories(catergory: number, page_index: number, pageSize: number){
+    return this.http.get<Products>(`${this.url}/shop/products/category/${catergory}?page_index=${page_index}&page_size=${pageSize}`)
   }
 
 }
