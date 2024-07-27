@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { ProductsService } from '../../shared/services/products.service';
-import { Products } from '../../shared';
+import { Product, Products } from '../../shared';
 import { CommonModule } from '@angular/common';
 
 import { RouterModule } from '@angular/router';
@@ -21,6 +21,8 @@ export default class MainComponent implements OnInit  {
   discounted: Products | null = null;
   currentCategory: number | null = null;
   isCategory: boolean = false;
+  search: Product[] = []
+  forSearch: Product[] | null = null;
 
   config = {
     pageIndex: 1,
@@ -34,10 +36,29 @@ export default class MainComponent implements OnInit  {
   }
 
 
+  searchFun(userSearch: string){
+    const filteredProducts = this.search.filter(product =>
+      product.title.toLowerCase().includes(userSearch.toLowerCase())
+    );
+    console.log(filteredProducts)
+
+    if(userSearch == ''){
+      this.forSearch = null;
+      return 
+    }
+
+    if(filteredProducts.length > 0){
+      console.log('Found', filteredProducts)
+      this.forSearch = filteredProducts
+    }else{
+      this.forSearch = null
+    }
+  }
 
   loadProducts(pageIndex: number, pageSize: number){
     this.httpRequest.getProducts(pageIndex, pageSize).subscribe((res) => {
       this.display = res
+      this.search.push(...res.products)
       this.config.totalItems = res.total
       this.isCategory= false
     })
