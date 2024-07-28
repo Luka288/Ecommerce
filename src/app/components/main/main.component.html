@@ -1,23 +1,14 @@
 <main>
+  <!-- @if (forSearch) {
+  <div class="searchDropdwon" *ngFor="let searchProduct of forSearch">
+    <p>{{ searchProduct.title }}</p>
+    <img [src]="searchProduct.thumbnail" [alt]="searchProduct.title" />
+  </div>
+  }@else if(!forSearch){ } -->
   <section class="discountedProducts">
     <div class="discountedSection">
       <div class="title">
         <h1>Discounted Products</h1>
-        <input
-          type="text"
-          name="search"
-          #searchValue
-          (keyup)="searchFun(searchValue.value)"
-        />
-        @if (forSearch) {
-        <div class="searchDisplay" *ngFor="let item of forSearch">
-          <h1>
-            {{ item.title }}
-          </h1>
-        </div>
-        }@else if(!forSearch){
-        <p>No Products Found</p>
-        }
       </div>
       <div class="sectionCards">
         <div

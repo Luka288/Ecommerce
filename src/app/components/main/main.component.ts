@@ -5,17 +5,19 @@ import { CommonModule } from '@angular/common';
 
 import { RouterModule } from '@angular/router';
 import { CategoriesService } from '../../shared/services/categories.service';
+import { SearchServiceService } from '../../shared/services/search-service.service';
 
 @Component({
   selector: 'app-main',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, CommonModule],
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss'],
 })
 export default class MainComponent implements OnInit  {
   private readonly httpRequest = inject(ProductsService)
   private readonly categoryRequest = inject(CategoriesService)
+  private readonly searchService = inject(SearchServiceService)
 
   display: Products | null = null;
   discounted: Products | null = null;
@@ -33,14 +35,17 @@ export default class MainComponent implements OnInit  {
   ngOnInit(): void {
     this.loadProducts(this.config.pageIndex, this.config.pageSize)
     this.forDiscountedProducts()
-  }
 
-//search funcrion still working on it
+    this.searchService.searchQuery$.subscribe(query => {
+      this.searchFun(query);
+    });
+  }
+  
   searchFun(userSearch: string){
     const filteredProducts = this.search.filter(product =>
       product.title.toLowerCase().includes(userSearch.toLowerCase())
     );
-    console.log(filteredProducts)
+    // console.log(filteredProducts)
 
     if(userSearch == ''){
       this.forSearch = null;
@@ -48,7 +53,7 @@ export default class MainComponent implements OnInit  {
     }
 
     if(filteredProducts.length > 0){
-      console.log('Found', filteredProducts)
+      // console.log('Found', filteredProducts)
       this.forSearch = filteredProducts
     }else{
       this.forSearch = null
