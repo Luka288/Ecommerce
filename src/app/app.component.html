@@ -18,7 +18,24 @@
         <div *ngIf="isDropdownVisible" class="searchDropdown">
           <div *ngIf="searchResults && searchResults.length; else noResults">
             <div *ngFor="let searchProduct of searchResults" class="searchItem">
-              <p>{{ searchProduct.title }}</p>
+              <div class="text">
+                <p>{{ searchProduct.title }}</p>
+                @if (searchProduct.price.discountPercentage) {
+                <s class="discount">
+                  {{ searchProduct.price.beforeDiscount }}
+                </s>
+                <p>
+                  {{ searchProduct.price.current }}
+                  <span>{{ searchProduct.price.currency }}</span>
+                </p>
+                }@else {
+                <p>
+                  {{ searchProduct.price.current }}
+                  <span>{{ searchProduct.price.currency }}</span>
+                </p>
+                }
+              </div>
+
               <img
                 [src]="searchProduct.thumbnail"
                 [alt]="searchProduct.title"

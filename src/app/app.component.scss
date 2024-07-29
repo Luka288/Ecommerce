@@ -12,22 +12,67 @@ nav {
       align-items: center;
 
       .searchWrap {
-        display: flex;
+        position: relative;
         align-items: center;
         background-color: #ffffff;
         border-radius: 3px;
         padding: 3px;
 
         svg {
-          width: 30px;
-          height: 30px;
-          cursor: pointer;
+          position: absolute;
+          width: 20px;
+          height: 20px;
+          right: 10px;
+          top: 50%;
+          transform: translateY(-50%);
+          fill: #616161;
         }
 
         input {
           outline: none;
           box-shadow: none;
           border: none;
+        }
+        input.form-control {
+          width: 100%;
+        }
+      }
+      .searchDropdown {
+        position: absolute;
+        top: 100%;
+        left: 0%;
+        width: 100%;
+        background-color: white;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        max-height: 200px;
+        overflow-y: auto;
+        z-index: 1200;
+
+        .searchItem {
+          padding: 10px;
+          display: flex;
+          align-items: center;
+          cursor: pointer;
+          border-bottom: 1px solid #eee;
+
+          img {
+            width: 50px;
+            height: auto;
+            margin-right: 10px;
+          }
+
+          p {
+            font-size: 12px;
+          }
+
+          .text {
+            display: flex;
+            flex-direction: column;
+
+            p {
+            }
+          }
         }
       }
     }
