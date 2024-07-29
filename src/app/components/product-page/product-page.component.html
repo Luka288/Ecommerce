@@ -31,6 +31,7 @@
                 alt=""
                 *ngFor="let imagePre of display.images; let i = index"
                 (click)="imgSet(i)"
+                [class.mainImg]="i === index"
               />
             </div>
             <button
@@ -68,12 +69,21 @@
             {{ display.brand }}
           </p>
 
-          <p>
-            {{ display.rating }}
-          </p>
+          <p>Rating: {{ display.rating }}</p>
+          @if (display.price.discountPercentage) {
+          <div class="aboutPrice">
+            <p>{{ display.price.current }} {{ display.price.currency }}</p>
+            <s class="oldPrice">
+              {{ display.price.beforeDiscount }}
+              {{ display.price.currency }}
+            </s>
+            <p class="discount">-{{ display.price.discountPercentage }}%</p>
+          </div>
+          }@else {
           <p>
             {{ display.price.current }}
           </p>
+          }
           <div class="topContainer">
             <ul>
               <li>
@@ -84,18 +94,6 @@
         </div>
       </div>
     </div>
-    <!-- <section class="purchase">
-      <div class="topContainer">
-        <ul>
-          <li>
-            <a href="">purchase</a>
-          </li>
-        </ul>
-      </div>
-      <div class="bottomContainer">
-        <a href="">wishlist</a>
-      </div>
-    </section> -->
   </section>
   <section class="test" *ngIf="display"></section>
 </main>

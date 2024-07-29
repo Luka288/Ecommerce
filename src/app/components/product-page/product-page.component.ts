@@ -21,6 +21,7 @@ export default class ProductPageComponent implements OnInit {
 
   //პირველი ფოტო
   firstImg: string | null = null;
+  index:number = 0;
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -42,6 +43,7 @@ export default class ProductPageComponent implements OnInit {
       //ფოტოზე დაჭერის შემდეგ ფოტოს ინდექსით
       //ხდება პირველი ფოტოს განახლება
       this.firstImg = this.display.images[index]
+      this.index = index
     }
   }
 }

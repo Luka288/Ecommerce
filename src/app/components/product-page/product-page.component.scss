@@ -2,8 +2,8 @@ main {
   width: 100%;
   height: 100%;
 
-  section {
-    height: 100%;
+  section.productContainer {
+    height: 85%;
     padding-top: 5.5%;
     display: flex;
     justify-content: flex-start;
@@ -11,8 +11,7 @@ main {
 
     .upperSide {
       display: flex;
-      justify-content: center;
-
+      padding-left: 3%;
       .item {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
@@ -61,6 +60,24 @@ main {
               }
             }
           }
+
+          .aboutPrice {
+            display: flex;
+            gap: 10px;
+            font-size: 25px;
+
+            .discount {
+              background-color: red;
+              border-radius: 3px;
+              width: 50px;
+              color: white;
+            }
+
+            .oldPrice {
+              color: rgb(124, 124, 124);
+              font-size: 20px;
+            }
+          }
         }
 
         .imgContainer {
@@ -91,6 +108,12 @@ main {
                 width: 100px;
                 height: 100px;
                 object-fit: contain;
+              }
+              img:hover {
+                border: 1px solid rgb(172, 171, 171);
+              }
+              .mainImg {
+                border: 1px solid black;
               }
             }
           }
@@ -124,6 +147,46 @@ main {
       svg {
         width: 50px;
         height: 50px;
+      }
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  main {
+    width: 100%;
+    section.productContainer {
+      width: 100%;
+      justify-content: center;
+
+      .upperSide {
+        .item {
+          display: grid;
+          grid-template-columns: repeat(1, 1fr);
+          gap: 30px;
+          justify-content: center;
+          align-items: center;
+          height: 300px;
+
+          .imgContainer {
+            display: flex;
+            flex-direction: column-reverse;
+
+            .carousel {
+              .imagePreview {
+                padding-top: 10%;
+              }
+            }
+          }
+        }
+
+        .infoWrap {
+          padding-top: 25%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+        }
       }
     }
   }
