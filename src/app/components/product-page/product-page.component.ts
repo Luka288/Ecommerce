@@ -29,4 +29,9 @@ export default class ProductPageComponent implements OnInit {
       }
     });
   }
+
+
+  imgSet(index: number){
+
+  }
 }

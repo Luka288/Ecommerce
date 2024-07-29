@@ -22,8 +22,15 @@
                 *ngFor="let image of display?.images; let i = index"
                 [class.active]="i === 0"
               >
-                <img [src]="image" class="" [alt]="display.title" />
+                <img [src]="image" [alt]="display.title" />
               </div>
+            </div>
+            <div class="imagePreview" *ngIf="display">
+              <img
+                [src]="imagePre"
+                alt=""
+                *ngFor="let imagePre of display.images"
+              />
             </div>
             <button
               class="carousel-control-prev"
@@ -66,10 +73,17 @@
           <p>
             {{ display.price.current }}
           </p>
+          <div class="topContainer">
+            <ul>
+              <li>
+                <a href="">purchase</a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
-    <section class="purchase">
+    <!-- <section class="purchase">
       <div class="topContainer">
         <ul>
           <li>
@@ -80,6 +94,7 @@
       <div class="bottomContainer">
         <a href="">wishlist</a>
       </div>
-    </section>
+    </section> -->
   </section>
+  <section class="test" *ngIf="display"></section>
 </main>

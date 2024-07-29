@@ -1,13 +1,13 @@
 main {
   width: 100%;
-  height: 100vh;
-  background-color: aliceblue;
+  height: 100%;
 
   section {
     height: 100%;
     padding-top: 5.5%;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: flex-start;
+    padding: 30px;
 
     .upperSide {
       display: flex;
@@ -30,7 +30,36 @@ main {
         .infoWrap {
           .descriptionStyle {
             width: 320px;
-            font-size: 1.4em;
+            font-size: 18px;
+          }
+
+          .topContainer {
+            ul {
+              width: 250px;
+              height: 55px;
+              li {
+                border: 1px solid black;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                list-style: none;
+                background-color: #bd9b07;
+                cursor: pointer;
+                transition: 0.3s ease-in-out;
+
+                a {
+                  text-decoration: none;
+                  font-size: 26px;
+                  text-transform: capitalize;
+                  color: white;
+                }
+              }
+
+              li:hover {
+                background-color: #d8b415;
+                transition: 0.3s ease-in-out;
+              }
+            }
           }
         }
 
@@ -50,6 +79,20 @@ main {
               object-fit: contain;
               border-radius: 15px;
             }
+
+            .imagePreview {
+              width: 100%;
+              display: grid;
+              grid-template-columns: repeat(4, 0fr);
+              justify-content: space-between;
+              padding-top: 25px;
+
+              img {
+                width: 100px;
+                height: 100px;
+                object-fit: contain;
+              }
+            }
           }
         }
       }
@@ -61,40 +104,6 @@ main {
       border: 1px solid black;
       display: grid;
       grid-template-columns: repeat(1, 0fr);
-
-      .topContainer {
-        display: flex;
-        justify-content: center;
-        width: 500px;
-        height: 300px;
-
-        ul {
-          width: 250px;
-          height: 55px;
-          li {
-            border: 1px solid black;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            list-style: none;
-            background-color: #bd9b07;
-            cursor: pointer;
-            transition: 0.3s ease-in-out;
-
-            a {
-              text-decoration: none;
-              font-size: 26px;
-              text-transform: capitalize;
-              color: white;
-            }
-          }
-
-          li:hover {
-            background-color: #d8b415;
-            transition: 0.3s ease-in-out;
-          }
-        }
-      }
 
       .bottomContainer {
         margin: auto;
