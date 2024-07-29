@@ -22,14 +22,15 @@
                 *ngFor="let image of display?.images; let i = index"
                 [class.active]="i === 0"
               >
-                <img [src]="image" [alt]="display.title" />
+                <img [src]="firstImg" [alt]="display.title" />
               </div>
             </div>
             <div class="imagePreview" *ngIf="display">
               <img
                 [src]="imagePre"
                 alt=""
-                *ngFor="let imagePre of display.images"
+                *ngFor="let imagePre of display.images; let i = index"
+                (click)="imgSet(i)"
               />
             </div>
             <button

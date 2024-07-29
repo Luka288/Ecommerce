@@ -19,19 +19,29 @@ export default class ProductPageComponent implements OnInit {
 
   display: SingleProduct | null = null;
 
+  //პირველი ფოტო
+  firstImg: string | null = null;
+
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
       if (id) {
         this.singlePageProduct.loadProduct(id).subscribe((product) => {
           this.display = product
+
+          //ვანიჭებთ პირველ ფოტოს მნიშვნელობას
+          this.firstImg = product.images[0]
         });
       }
     });
   }
 
-
+  //გადაგვაქ ფოტოს ინდექსი
   imgSet(index: number){
-
+    if(this.display){
+      //ფოტოზე დაჭერის შემდეგ ფოტოს ინდექსით
+      //ხდება პირველი ფოტოს განახლება
+      this.firstImg = this.display.images[index]
+    }
   }
 }
