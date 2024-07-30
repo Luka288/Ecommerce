@@ -22,7 +22,7 @@
             {{ product.price.currency }}
           </h4>
           <p>{{ product.title }}</p>
-          <button class="cart">Add to cart</button>
+          <button class="cart" (click)="getCart(product)">Add to cart</button>
           <a routerLink="/product/id/{{ product._id }}">View Product</a>
         </div>
       </div>
@@ -41,7 +41,10 @@
       </div>
     </div>
     <div class="mainProducts">
-      <div class="productCard" *ngFor="let product of display?.products">
+      <div
+        class="productCard"
+        *ngFor="let product of display?.products; let i = index"
+      >
         <img [src]="product.thumbnail" [alt]="product.title" />
         <h4 class="productPrice">
           @if(product.price.discountPercentage){
@@ -55,7 +58,7 @@
         <p>
           {{ product.title }}
         </p>
-        <button class="cart">Add to cart</button>
+        <button class="cart" (click)="getCart(product)">Add to cart</button>
         <a routerLink="/product/id/{{ product._id }}" class="viewProduct"
           >View Product</a
         >

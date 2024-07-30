@@ -1,9 +1,10 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { SearchServiceService } from './shared/services/search-service.service';
 import { Product } from './shared/interface/products';
 import { ProductsService } from './shared';
 import { CommonModule } from '@angular/common';
+import { CartService } from './shared/services/cart.service';
 
 @Component({
   selector: 'app-root',
@@ -12,19 +13,29 @@ import { CommonModule } from '@angular/common';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   private readonly searchService = inject(SearchServiceService)
   private readonly productsService = inject(ProductsService)
+  private readonly cartService = inject(CartService)
 
 
   searchResults: Product[] | null = null;
   isDropdownVisible = false;
+
+  addedProduct: Product[] = [];
 
 
   config = {
     pageIndex: 1,
     pageSize: 12,
     totalItems: 0,
+  }
+
+  ngOnInit(): void {
+    this.cartService.products$.subscribe((res) => {
+      this.addedProduct = res
+      console.log(this.cartService.products$)
+    })
   }
 
   onSearch(event: Event){
@@ -46,6 +57,14 @@ export class AppComponent {
         product.title.toLowerCase().includes(search.toLowerCase())
       );
     });
+  }
+
+
+  cartProductCount(product: Product){
+    this.cartService.products$.subscribe((res) => {
+      this.addedProduct = res
+      console.log(this.cartService.products$)
+    })
   }
 
 

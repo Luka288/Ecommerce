@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, inject, OnInit, Output, output } from '@angular/core';
 import { ProductsService } from '../../shared/services/products.service';
 import { Product, Products } from '../../shared';
 import { CommonModule } from '@angular/common';
@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { CategoriesService } from '../../shared/services/categories.service';
 import { SearchServiceService } from '../../shared/services/search-service.service';
+import { CartService } from '../../shared/services/cart.service';
 
 @Component({
   selector: 'app-main',
@@ -18,13 +19,16 @@ export default class MainComponent implements OnInit  {
   private readonly httpRequest = inject(ProductsService)
   private readonly categoryRequest = inject(CategoriesService)
   private readonly searchService = inject(SearchServiceService)
-
+  private readonly cartService = inject(CartService)
+  
   display: Products | null = null;
   discounted: Products | null = null;
   currentCategory: number | null = null;
   isCategory: boolean = false;
   search: Product[] = []
   forSearch: Product[] | null = null;
+  addedProduct: Product[] = []
+
 
   config = {
     pageIndex: 1,
@@ -45,7 +49,6 @@ export default class MainComponent implements OnInit  {
     const filteredProducts = this.search.filter(product =>
       product.title.toLowerCase().includes(userSearch.toLowerCase())
     );
-    // console.log(filteredProducts)
 
     if(userSearch == ''){
       this.forSearch = null;
@@ -53,7 +56,6 @@ export default class MainComponent implements OnInit  {
     }
 
     if(filteredProducts.length > 0){
-      // console.log('Found', filteredProducts)
       this.forSearch = filteredProducts
     }else{
       this.forSearch = null
@@ -98,5 +100,9 @@ export default class MainComponent implements OnInit  {
   }
   get totalPages(): number {
     return Math.ceil(this.config.totalItems / this.config.pageSize);
+  }
+
+  getCart(product: Product){
+    this.cartService.addProduct(product)
   }
 }
