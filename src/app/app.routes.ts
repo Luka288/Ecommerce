@@ -12,6 +12,12 @@ export const routes: Routes = [
         title: 'Product Page'
     },
     {
+        path: 'auth',
+        loadComponent: () => import('./components/auth-page/auth-page.component'),
+        title: 'Auth Page'
+    },
+
+    {
         path: '**',
         loadComponent: () => import('./components/not-found/not-found.component'),
         title: 'Page Not Found'

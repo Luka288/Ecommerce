@@ -1,5 +1,5 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterModule, RouterOutlet } from '@angular/router';
 import { SearchServiceService } from './shared/services/search-service.service';
 import { Product } from './shared/interface/products';
 import { ProductsService } from './shared';
@@ -9,7 +9,7 @@ import { CartService } from './shared/services/cart.service';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CommonModule],
+  imports: [RouterOutlet, CommonModule, RouterModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
