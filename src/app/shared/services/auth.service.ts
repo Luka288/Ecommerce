@@ -12,7 +12,7 @@ export class AuthService {
   private readonly authAPI = apiURL
 
   register(user: AuthInterface){
-    return this.http.post<AuthInterface>(`${this.authAPI}`, user)
+    return this.http.post<AuthInterface>(`${this.authAPI}/auth/sign_up`, user)
   }
 
   //auth page dan gadecema USER parametrit inputebis value validatorebidan
