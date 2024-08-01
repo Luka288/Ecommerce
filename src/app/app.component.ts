@@ -5,6 +5,8 @@ import { Product } from './shared/interface/products';
 import { ProductsService } from './shared';
 import { CommonModule } from '@angular/common';
 import { CartService } from './shared/services/cart.service';
+import { LocalStorageKeys } from './shared/enums';
+import { AuthService } from './shared/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +19,7 @@ export class AppComponent implements OnInit {
   private readonly searchService = inject(SearchServiceService)
   private readonly productsService = inject(ProductsService)
   private readonly cartService = inject(CartService)
+  private readonly auth = inject(AuthService)
 
 
   searchResults: Product[] | null = null;
@@ -67,5 +70,9 @@ export class AppComponent implements OnInit {
     })
   }
 
+
+  logOut(){
+    this.auth.logOut()
+  }
 
 }
