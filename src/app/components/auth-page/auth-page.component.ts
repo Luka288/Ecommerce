@@ -73,7 +73,7 @@ export default  class AuthPageComponent {
     user.avatar = `${this.userAvatar}${user.firstName}`
     this.tabIndex = 1;
 
-    if(!user.email || !user.password){
+    if(!user._id){
       this.alerts.toast("Wrong", 'error', 'no');
       return
     }
@@ -87,6 +87,8 @@ export default  class AuthPageComponent {
       this.signUpForm.reset()
       console.log(user)
     })).subscribe()
+    
+
 
 
   }
@@ -97,7 +99,7 @@ export default  class AuthPageComponent {
 
     if(!email || !password){
       this.alerts.toast('Check password or email', 'error', 'Check if password or email is correct')
-      return 
+      return
     }
     this.authService.logIn(email, password).pipe(
       tap(token => {
@@ -105,7 +107,7 @@ export default  class AuthPageComponent {
         this.route.navigateByUrl('')
       }),
       catchError((err) => {
-        console.log(err)
+        this.alerts.toast('Check password or email', 'error', 'Check if password or email is correct')
         return EMPTY;
       }),
     ).subscribe()

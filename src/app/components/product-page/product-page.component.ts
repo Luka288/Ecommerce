@@ -5,6 +5,7 @@ import { SingleProductService } from '../../shared/services/single-product.servi
 import { Products } from '../../shared';
 import { SingleProduct } from '../../shared/interface/singleProduct';
 import { routes } from '../../app.routes';
+import { AppComponent } from '../../app.component';
 
 @Component({
   selector: 'app-product-page',
@@ -29,7 +30,6 @@ export default class ProductPageComponent implements OnInit {
       if (id) {
         this.singlePageProduct.loadProduct(id).subscribe((product) => {
           this.display = product
-
           //ვანიჭებთ პირველ ფოტოს მნიშვნელობას
           this.firstImg = product.images[0]
         });

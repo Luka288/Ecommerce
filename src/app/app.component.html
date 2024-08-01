@@ -40,6 +40,11 @@
                 [src]="searchProduct.thumbnail"
                 [alt]="searchProduct.title"
               />
+              <a
+                routerLink="/product/id/{{ searchProduct._id }}"
+                (click)="clearSearch()"
+                >View product</a
+              >
             </div>
           </div>
           <ng-template #noResults>

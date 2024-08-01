@@ -43,21 +43,27 @@ export class AppComponent implements OnInit {
 
   onSearch(event: Event){
     const target = event.target as HTMLInputElement
-    const value = target.value || '';
+    let value = target.value || '';
     this.searchService.setSearchQuery(value)
     this.searchProducts(value);
     this.isDropdownVisible = !!value;
   }
 
+  clearSearch(){
+    this.isDropdownVisible = false
+    this.searchResults = []
+  }
+
   searchProducts(search: string): void {
     if (search === '') {
       this.searchResults = null;
+      this.isDropdownVisible = false;
       return;
     }
   
     this.productsService.getProducts(1, 50).subscribe((res) => {
       this.searchResults = res.products.filter(product =>
-        product.title.toLowerCase().includes(search.toLowerCase())
+        product.title.toLowerCase().includes(search.toLowerCase()),
       );
     });
   }
