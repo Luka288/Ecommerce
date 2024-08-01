@@ -26,9 +26,9 @@ export default  class AuthPageComponent {
 
 
 
-  private readonly userAvatar = UserAvatar;
+    private readonly userAvatar = UserAvatar;
 
-  tabIndex = 0;
+    tabIndex = 0;
 
    readonly signUpForm = this.fb.group({
     firstName: new FormControl('', [
@@ -71,21 +71,24 @@ export default  class AuthPageComponent {
   register(){
     const user = this.signUpForm.value as AuthInterface;
     user.avatar = `${this.userAvatar}${user.firstName}`
-
-    this.authService.register(user).pipe(tap(user => {
-      if(user._id){
-        this.alerts.alert('success', 'success', 'success')
-        // this.verifyAsUser(user.email)
-        this.tabIndex = 0;
-      }
-      this.signUpForm.reset()
-      console.log(user)
-    })).subscribe()
+    this.tabIndex = 1;
 
     if(!user.email || !user.password){
       this.alerts.toast("Wrong", 'error', 'no');
       return
     }
+
+    this.authService.register(user).pipe(tap(user => {
+      if(user._id){
+        this.alerts.alert('success', 'success', 'success')
+        this.tabIndex = 0;
+        // this.verifyAsUser(user.email)
+      }
+      this.signUpForm.reset()
+      console.log(user)
+    })).subscribe()
+
+
   }
  
   login(){
