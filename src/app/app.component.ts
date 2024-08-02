@@ -41,10 +41,10 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.cartService.products$.subscribe((res) => {
-      this.addedProduct = res
-      console.log(this.cartService.products$)
-    })
+    // this.cartService.products$.subscribe((res) => {
+    //   this.addedProduct = res
+    //   console.log(this.cartService.products$)
+    // })
   }
 
   onSearch(event: Event){
@@ -75,12 +75,12 @@ export class AppComponent implements OnInit {
   }
 
 
-  cartProductCount(product: Product){
-    this.cartService.products$.subscribe((res) => {
-      this.addedProduct = res
-      console.log(this.cartService.products$)
-    })
-  }
+  // cartProductCount(product: Product){
+  //   this.cartService.products$.subscribe((res) => {
+  //     this.addedProduct = res
+  //     console.log(this.cartService.products$)
+  //   })
+  // }
 
 
   logOut(){

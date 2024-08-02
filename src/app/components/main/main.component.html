@@ -9,6 +9,8 @@
     <div class="discountedSection">
       <div class="title">
         <h1>Discounted Products</h1>
+        <button (click)="getItemCart()">get cart</button>
+        <button (click)="deleteCart()">delete cart</button>
       </div>
       <div class="sectionCards">
         <div
@@ -22,7 +24,9 @@
             {{ product.price.currency }}
           </h4>
           <p>{{ product.title }}</p>
-          <button class="cart" (click)="getCart(product)">Add to cart</button>
+          <button class="cart" (click)="passItem(product._id, 1)">
+            Add to cart
+          </button>
           <a routerLink="/product/id/{{ product._id }}">View Product</a>
         </div>
       </div>
@@ -58,7 +62,9 @@
         <p>
           {{ product.title }}
         </p>
-        <button class="cart" (click)="getCart(product)">Add to cart</button>
+        <button class="cart" (click)="passItem(product._id, 1)">
+          Add to cart
+        </button>
         <a routerLink="/product/id/{{ product._id }}" class="viewProduct"
           >View Product</a
         >

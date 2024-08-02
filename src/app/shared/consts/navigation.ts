@@ -18,10 +18,6 @@ export const NavBar: nav[] = [
         title: 'Wishlist',
         path: '',
     },
-    // {
-    //     title: 'Log Out',
-    //     path: ''
-    // }
 ]
 
 export const AfterAuth: nav[] = [
@@ -33,10 +29,6 @@ export const AfterAuth: nav[] = [
         title: "Wishlist",
         path: '',
     },
-    // {
-    //     title: 'Log Out',
-    //     path: '',
-    // }
 ]
 
 export const BeforeAuth: nav[] = [

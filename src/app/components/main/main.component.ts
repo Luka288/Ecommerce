@@ -20,6 +20,8 @@ export default class MainComponent implements OnInit  {
   private readonly categoryRequest = inject(CategoriesService)
   private readonly searchService = inject(SearchServiceService)
   private readonly cartService = inject(CartService)
+
+  
   
   display: Products | null = null;
   discounted: Products | null = null;
@@ -102,7 +104,38 @@ export default class MainComponent implements OnInit  {
     return Math.ceil(this.config.totalItems / this.config.pageSize);
   }
 
-  getCart(product: Product){
-    this.cartService.addProduct(product)
+  // getCart(product: Product){
+  //   this.cartService.addProduct(product)
+  // }
+
+
+  passItem(id: string, number: number) {
+    const res = this.cartService.createCart(id, number)
+
+    if(res){
+      res.subscribe((res)=> {
+        console.log(res)
+      })
+    }
+  }
+
+  getItemCart(){
+   const cart = this.cartService.getCart()
+
+    if(cart){
+      cart.subscribe((res)=> {
+        console.log(res)
+      })
+    }
+  }
+
+  deleteCart(){
+    const deletCart = this.cartService.clearCart();
+
+    if(deletCart){
+      deletCart.subscribe((res)=> {
+        console.log(res)
+      })
+    }
   }
 }
