@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { canActivate, canUserAuth } from './shared/services/auth.service';
 
 export const routes: Routes = [
     {
@@ -14,7 +15,8 @@ export const routes: Routes = [
     {
         path: 'auth',
         loadComponent: () => import('./components/auth-page/auth-page.component'),
-        title: 'Auth Page'
+        title: 'Auth Page',
+        canActivate: [canUserAuth],
     },
 
     {

@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { CartService } from './shared/services/cart.service';
 import { LocalStorageKeys } from './shared/enums';
 import { AuthService } from './shared/services/auth.service';
+import { AfterAuth, BeforeAuth, NavBar } from './shared/consts/navigation';
 
 @Component({
   selector: 'app-root',
@@ -20,6 +21,11 @@ export class AppComponent implements OnInit {
   private readonly productsService = inject(ProductsService)
   private readonly cartService = inject(CartService)
   private readonly auth = inject(AuthService)
+ 
+  readonly user$ = this.auth.user$
+  readonly beforeAuth = BeforeAuth
+  readonly afterAuth = AfterAuth
+  readonly navBar = NavBar
 
 
   searchResults: Product[] | null = null;

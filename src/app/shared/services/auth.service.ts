@@ -7,7 +7,8 @@ import { BehaviorSubject, tap } from 'rxjs';
 import { JwtTokens } from '../interface/tokens';
 import { LocalStorageKeys } from '../enums';
 import { SweetAlertService } from './sweet-alert.service';
-import { Router } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivateChildFn, CanActivateFn, Router, RouterStateSnapshot } from '@angular/router';
+import { routes } from '../../app.routes';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,7 @@ export class AuthService {
   private readonly authAPI = apiURL
 
   constructor(){
-    
+    this.init()
   }
 
   readonly #user$ = new BehaviorSubject<user | null>(null)
@@ -53,6 +54,9 @@ export class AuthService {
   }
 
   init(){
+    if(this.accessToken && this.refreshToken) {
+      this.user = this.jwtHelperService.decodeToken(this.accessToken)
+    }
   }
 
 
@@ -65,17 +69,17 @@ export class AuthService {
        tap((token) => {
         this.accessToken = token.access_token
         this.refreshToken = token.refresh_token
-        console.log(this.jwtHelperService.decodeToken(token.access_token)
-        )
+        this.user = this.jwtHelperService.decodeToken(token.access_token)
       })
     )
   }
 
   logOut(){
-    this.alerts.toast('Signed out', 'success', 'You are signed out')
+    this.alerts.toast("Signed Out", "success", "green")
     localStorage.removeItem(LocalStorageKeys.AccessToken)
-    localStorage.removeItem(LocalStorageKeys.RefreshToken)
+    localStorage.removeItem(LocalStorageKeys.RefreshToken) 
     this.route.navigateByUrl('')
+    this.user = null
 
   }
 
@@ -83,5 +87,36 @@ export class AuthService {
     return this.http.post(`${this.authAPI}/auth/verify_email`, email)
   }
 
+  isUserAuth(){
+    if(this.jwtHelperService.isTokenExpired(this.accessToken)){
+      this.route.navigateByUrl('/auth')
+      return false
+    }
+    return true
+  }
+
+
+  canUserAuth(){
+    if(this.accessToken || this.refreshToken){
+      this.route.navigateByUrl('')
+      return false
+    }else{
+      return true
+    }
+  }
 
 }
+export const canActivate: CanActivateFn = (
+  route: ActivatedRouteSnapshot,
+  state: RouterStateSnapshot,
+) => {
+  return inject(AuthService).isUserAuth();
+};
+
+
+export const canUserAuth: CanActivateFn = (
+  route: ActivatedRouteSnapshot,
+  state: RouterStateSnapshot,
+) => {
+  return inject(AuthService).canUserAuth();
+};
