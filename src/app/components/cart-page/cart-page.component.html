@@ -2,11 +2,15 @@
   <section>
     <div *ngIf="display">
       <div class="items" *ngFor="let item of display.products">
-        <img *ngIf="forImg" [src]="forImg.thumbnail" [alt]="display._id" />
+        <img
+          [src]="productThumbnails[item.productId]"
+          alt=""
+          *ngIf="productThumbnails[item.productId]"
+        />
         <h1>ProductID: {{ item.productId }}</h1>
         <h1>Price Before Discount: {{ item.beforeDiscountPrice }}</h1>
         <h1>Price Per quantity: {{ item.pricePerQuantity }}</h1>
-        <h1>Product quantity : {{ item.quantity }}</h1>
+        <h1>Product quantity: {{ item.quantity }}</h1>
       </div>
       <h1>Order ID: {{ display._id }}</h1>
       <h1>Created At: {{ display.createdAt }}</h1>
