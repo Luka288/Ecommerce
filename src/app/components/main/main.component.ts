@@ -124,7 +124,7 @@ export default class MainComponent implements OnInit  {
    const cart = this.cartService.getCart()
 
     if(cart){
-      cart.subscribe((res)=> {
+      cart.subscribe((res: UserCart)=> {
         console.log(res)
       })
     }

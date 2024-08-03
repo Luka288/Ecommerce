@@ -1,5 +1,5 @@
 import { inject, Injectable, InjectionToken } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, tap } from 'rxjs';
 import { Product } from '../interface';
 import { HttpClient, HttpHeaderResponse, HttpHeaders } from '@angular/common/http';
 import { apiURL } from '../consts';
@@ -18,6 +18,17 @@ export class CartService {
 
   private readonly url = apiURL
 
+  readonly #cartDisplay$ = new BehaviorSubject<UserCart | null>(null)
+  readonly cartDisplay$ = this.#cartDisplay$.asObservable()
+
+  get cartDisplay(){
+    return this.#cartDisplay$.value
+  }
+
+  set cartDisplay(info: UserCart | null){
+    this.#cartDisplay$.next(info)
+  }
+
 
   createCart(id: string, quantity: number){
     const token = this.auth.refreshToken
@@ -34,18 +45,22 @@ export class CartService {
     }
   }
 
-  getCart(){
-    const token = this.auth.refreshToken
-    if(token){
-      const headers = new HttpHeaders({ 
+  getCart() {
+    const token = this.auth.refreshToken;
+    if (token) {
+      const headers = new HttpHeaders({
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
-      })  
-      return this.http.get(`${this.url}/shop/cart`, { headers })
-    }else{
+      });
+  
+      return this.http.get<UserCart>(`${this.url}/shop/cart`, { headers }).pipe(
+        tap((res) => {
+          this.cartDisplay = res;
+        })
+      );
+    } else {
       return null;
     }
-    
   }
 
   updateCart(id: string, quantity: number){
