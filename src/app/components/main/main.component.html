@@ -23,20 +23,7 @@
             {{ product.price.currency }}
           </h4>
           <p>{{ product.title }}</p>
-          @if (passitemTrack) {
-          <button
-            class="cart"
-            [disabled]="product.stock === 0"
-            (click)="updateCart(product._id, 1)"
-          >
-            Add to cart
-          </button>
-          }@else {
-          <button class="cart" (click)="passItem(product._id, 1)">
-            Add to cart
-          </button>
-          }
-          <!-- @if (product.stock === 0) {
+          @if (product.stock === 0) {
           <button
             [disabled]="true"
             class="cart"
@@ -60,7 +47,7 @@
           >
             Add to cart
           </button>
-          } -->
+          }
           <a routerLink="/product/id/{{ product._id }}">View Product</a>
         </div>
       </div>
