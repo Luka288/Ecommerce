@@ -1,11 +1,12 @@
 import { inject, Injectable, InjectionToken } from '@angular/core';
 import { BehaviorSubject, tap } from 'rxjs';
-import { Product } from '../interface';
+import { Product, Products } from '../interface';
 import { HttpClient, HttpHeaderResponse, HttpHeaders } from '@angular/common/http';
 import { apiURL } from '../consts';
 import { AuthService } from './auth.service';
 import { SweetAlertService } from './sweet-alert.service';
 import { UserCart } from '../interface/cart';
+import { SingleProduct } from '../interface/singleProduct';
 
 @Injectable({
   providedIn: 'root'
@@ -89,6 +90,10 @@ export class CartService {
       return this.http.delete(`${this.url}/shop/cart`, { headers })
     }
     return null;
+  }
+
+  imgCartItem(id: string){
+    return this.http.get<SingleProduct>(`https://api.everrest.educata.dev/shop/products/id/${id}`)
   }
 
 }

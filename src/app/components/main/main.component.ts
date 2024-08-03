@@ -48,7 +48,14 @@ export default class MainComponent implements OnInit  {
 
     this.searchService.searchQuery$.subscribe(query => {
       this.searchFun(query);
-    });
+    })
+
+    const storedPassItemTrack = localStorage.getItem('passitemTrack');
+    if (storedPassItemTrack) {
+      this.passitemTrack = JSON.parse(storedPassItemTrack);
+      } else {
+      this.passitemTrack = false;
+    }
   }
   
   searchFun(userSearch: string){
@@ -110,11 +117,12 @@ export default class MainComponent implements OnInit  {
 
   passItem(id: string, number: number) {
     const res = this.cartService.createCart(id, number)
-
     if(res){
       res.subscribe((res)=> {
         console.log(res)
-        this.passitemTrack = true
+        console.log(this.passitemTrack)
+        localStorage.setItem('passitemTrack', JSON.stringify(true));
+        this.changeDetector.detectChanges();
       })
     }
   }
@@ -134,9 +142,8 @@ export default class MainComponent implements OnInit  {
     if (deleteCart) {
       deleteCart.subscribe((res) => {
         console.log(res);
-        this.passitemTrack = false;
-        this.changeDetector.detectChanges(); // Manually trigger change detection
       });
+      localStorage.setItem('passitemTrack', JSON.stringify(false));
     }
   }
 
