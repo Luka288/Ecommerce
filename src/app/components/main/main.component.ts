@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { CategoriesService } from '../../shared/services/categories.service';
 import { SearchServiceService } from '../../shared/services/search-service.service';
 import { CartService } from '../../shared/services/cart.service';
+import { UserCart } from '../../shared/interface/cart';
 
 @Component({
   selector: 'app-main',

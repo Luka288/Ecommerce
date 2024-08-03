@@ -24,9 +24,19 @@
             {{ product.price.currency }}
           </h4>
           <p>{{ product.title }}</p>
+          @if (product.stock === 0) {
+          <button
+            [disabled]="true"
+            class="cart"
+            (click)="passItem(product._id, 1)"
+          >
+            Add to cart
+          </button>
+          }@else {
           <button class="cart" (click)="passItem(product._id, 1)">
             Add to cart
           </button>
+          }
           <a routerLink="/product/id/{{ product._id }}">View Product</a>
         </div>
       </div>
@@ -62,9 +72,19 @@
         <p>
           {{ product.title }}
         </p>
+        @if (product.stock === 0) {
+        <button
+          [disabled]="true"
+          class="cart"
+          (click)="passItem(product._id, 1)"
+        >
+          Add to cart
+        </button>
+        }@else {
         <button class="cart" (click)="passItem(product._id, 1)">
           Add to cart
         </button>
+        }
         <a routerLink="/product/id/{{ product._id }}" class="viewProduct"
           >View Product</a
         >
