@@ -12,7 +12,7 @@ export const NavBar: nav[] = [
     },
     {
         title: "Cart",
-        path: ''
+        path: 'cart'
     },
     {
         title: 'Wishlist',
@@ -23,7 +23,7 @@ export const NavBar: nav[] = [
 export const AfterAuth: nav[] = [
     {
         title: "Cart",
-        path: '',
+        path: 'cart',
     },
     {
         title: "Wishlist",
@@ -43,7 +43,7 @@ export const BeforeAuth: nav[] = [
     },
     {
         title: "Cart",
-        path: ''
+        path: 'cart'
     },
     {
         title: 'Wishlist',

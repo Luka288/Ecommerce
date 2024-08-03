@@ -18,6 +18,11 @@ export const routes: Routes = [
         title: 'Auth Page',
         canActivate: [canUserAuth],
     },
+    {
+        path: 'cart',
+        loadComponent: () => import('./components/cart-page/cart-page.component'),
+        title: 'Cart Page'
+    },
 
     {
         path: '**',
