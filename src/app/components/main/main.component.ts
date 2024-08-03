@@ -22,6 +22,7 @@ export default class MainComponent implements OnInit  {
   private readonly searchService = inject(SearchServiceService)
   private readonly cartService = inject(CartService)
 
+  constructor(private changeDetector: ChangeDetectorRef){}
   
   
   display: Products | null = null;
@@ -128,14 +129,14 @@ export default class MainComponent implements OnInit  {
     }
   }
 
-  deleteCart(){
-    const deletCart = this.cartService.clearCart();
-
-    if(deletCart){
-      deletCart.subscribe((res)=> {
-        console.log(res)
-        this.passitemTrack = false
-      })
+  deleteCart() {
+    const deleteCart = this.cartService.clearCart();
+    if (deleteCart) {
+      deleteCart.subscribe((res) => {
+        console.log(res);
+        this.passitemTrack = false;
+        this.changeDetector.detectChanges(); // Manually trigger change detection
+      });
     }
   }
 
