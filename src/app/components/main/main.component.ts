@@ -32,6 +32,8 @@ export default class MainComponent implements OnInit  {
   forSearch: Product[] | null = null;
   addedProduct: Product[] = []
 
+  passitemTrack: boolean = false
+
 
   config = {
     pageIndex: 1,
@@ -116,7 +118,10 @@ export default class MainComponent implements OnInit  {
     if(res){
       res.subscribe((res)=> {
         console.log(res)
+        this.passitemTrack = true
       })
+    }else{
+      this.passitemTrack = false
     }
   }
 
@@ -135,6 +140,17 @@ export default class MainComponent implements OnInit  {
 
     if(deletCart){
       deletCart.subscribe((res)=> {
+        console.log(res)
+        this.passitemTrack = false
+      })
+    }
+  }
+
+  updateCart(id: string, number: number){
+    const update = this.cartService.updateCart(id, number);
+    if(update){
+      update.subscribe((res) => {
+        console.log('updating')
         console.log(res)
       })
     }

@@ -11,6 +11,11 @@
         <h1>Discounted Products</h1>
         <button (click)="getItemCart()">get cart</button>
         <button (click)="deleteCart()">delete cart</button>
+        @if (passitemTrack) {
+        <h1>okay giji xar</h1>
+        }@else {
+        <h1></h1>
+        }
       </div>
       <div class="sectionCards">
         <div
@@ -28,12 +33,23 @@
           <button
             [disabled]="true"
             class="cart"
-            (click)="passItem(product._id, 1)"
+            (click)="
+              passitemTrack
+                ? passItem(product._id, 1)
+                : updateCart(product._id, 1)
+            "
           >
             Add to cart
           </button>
           }@else {
-          <button class="cart" (click)="passItem(product._id, 1)">
+          <button
+            class="cart"
+            (click)="
+              passitemTrack
+                ? passItem(product._id, 1)
+                : updateCart(product._id, 1)
+            "
+          >
             Add to cart
           </button>
           }
@@ -81,7 +97,14 @@
           Add to cart
         </button>
         }@else {
-        <button class="cart" (click)="passItem(product._id, 1)">
+        <button
+          class="cart"
+          (click)="
+            passitemTrack
+              ? passItem(product._id, 1)
+              : updateCart(product._id, 1)
+          "
+        >
           Add to cart
         </button>
         }
