@@ -92,17 +92,22 @@
         <button
           [disabled]="true"
           class="cart"
-          (click)="passItem(product._id, 1)"
+          (click)="
+            passitemTrack
+              ? updateCart(product._id, 1)
+              : passItem(product._id, 1)
+          "
         >
           Add to cart
         </button>
         }@else {
         <button
+          [disabled]="false"
           class="cart"
           (click)="
             passitemTrack
-              ? passItem(product._id, 1)
-              : updateCart(product._id, 1)
+              ? updateCart(product._id, 1)
+              : passItem(product._id, 1)
           "
         >
           Add to cart

@@ -120,8 +120,6 @@ export default class MainComponent implements OnInit  {
         console.log(res)
         this.passitemTrack = true
       })
-    }else{
-      this.passitemTrack = false
     }
   }
 
