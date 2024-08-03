@@ -107,11 +107,6 @@ export default class MainComponent implements OnInit  {
     return Math.ceil(this.config.totalItems / this.config.pageSize);
   }
 
-  // getCart(product: Product){
-  //   this.cartService.addProduct(product)
-  // }
-
-
   passItem(id: string, number: number) {
     const res = this.cartService.createCart(id, number)
 
