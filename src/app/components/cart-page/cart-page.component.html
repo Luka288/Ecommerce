@@ -1,21 +1,37 @@
 <main>
-  <section>
-    <div *ngIf="display">
+  <section class="mainWrapper">
+    @if (!display || !display.products.length) {
+    <img
+      src="https://nosups.co.za/modules/products/uploads/no-product.png"
+      alt=""
+    />
+    }@else {
+    <div *ngIf="display" class="productsContainer">
       <div class="items" *ngFor="let item of display.products">
         <img
           [src]="productThumbnails[item.productId]"
           alt=""
           *ngIf="productThumbnails[item.productId]"
         />
-        <h1>ProductID: {{ item.productId }}</h1>
-        <h1>Price Before Discount: {{ item.beforeDiscountPrice }}</h1>
-        <h1>Price Per quantity: {{ item.pricePerQuantity }}</h1>
-        <h1>Product quantity: {{ item.quantity }}</h1>
+        <div class="infos">
+          <div class="priceTitle">
+            <p>{{ titleSetMap.get(item.productId) }}</p>
+            <p>Price: {{ item.beforeDiscountPrice }}</p>
+          </div>
+          <div class="otherInfo">
+            <p>Product quantity: {{ item.quantity }}</p>
+            <a (click)="removeOneItem(item.productId)">Remove</a>
+          </div>
+        </div>
       </div>
-      <h1>Order ID: {{ display._id }}</h1>
-      <h1>Created At: {{ display.createdAt }}</h1>
-      <h1>Total Products: {{ display.total.products }}</h1>
-      <button (click)="getProduct()">Get Product</button>
     </div>
+    <div class="purchaseSection">
+      <div class="upperSide" *ngIf="display">
+        <a href="">Pay</a>
+        <h3>Total price : {{ display.total.price.current }}</h3>
+        <h3>Total Items: {{ display.total.products }}</h3>
+      </div>
+    </div>
+    }
   </section>
 </main>

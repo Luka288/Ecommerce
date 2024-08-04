@@ -92,6 +92,22 @@ export class CartService {
     return null;
   }
 
+  deleteItem(id: string){
+    const token = this.auth.refreshToken;
+
+    if(token){
+      const headers = new HttpHeaders({
+        'accept': 'application/json',
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      })
+      const body = {id: id}
+      return this.http.delete(`${this.url}/shop/cart/product`, {body, headers})
+    }else{
+      return console.log('error from cart service deleteItem()')
+    }
+  }
+
   imgCartItem(id: string){
     return this.http.get<SingleProduct>(`https://api.everrest.educata.dev/shop/products/id/${id}`)
   }

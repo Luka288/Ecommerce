@@ -4,7 +4,7 @@ export interface UserCart {
     total: {
         price: {
             current: number,
-            beforeDiscount: number,
+            beforeDiscount?: number,
         },
         quantity: number,
         products: number,
