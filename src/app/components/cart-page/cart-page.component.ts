@@ -36,7 +36,6 @@ export default class CartPageComponent implements OnInit {
         this.titleSetMap.clear()
         this.display.products.forEach(product => {
           this.getImg(product.productId);
-          this.getImg(product.productId);
           this.changeDetector.markForCheck()
         });
       }
