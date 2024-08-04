@@ -87,7 +87,9 @@
           <div class="topContainer">
             <ul>
               <li>
-                <a href="">purchase</a>
+                <a (click)="addToCart(display._id, this.quantity + 1)"
+                  >Add to cart</a
+                >
               </li>
             </ul>
           </div>

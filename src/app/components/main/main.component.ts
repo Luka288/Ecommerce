@@ -8,6 +8,7 @@ import { CategoriesService } from '../../shared/services/categories.service';
 import { SearchServiceService } from '../../shared/services/search-service.service';
 import { CartService } from '../../shared/services/cart.service';
 import { UserCart } from '../../shared/interface/cart';
+import { SweetAlertService } from '../../shared/services/sweet-alert.service';
 
 @Component({
   selector: 'app-main',
@@ -21,6 +22,7 @@ export default class MainComponent implements OnInit  {
   private readonly categoryRequest = inject(CategoriesService)
   private readonly searchService = inject(SearchServiceService)
   private readonly cartService = inject(CartService)
+  private readonly alert = inject(SweetAlertService)
 
   constructor(private changeDetector: ChangeDetectorRef){}
   

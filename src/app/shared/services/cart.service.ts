@@ -22,6 +22,8 @@ export class CartService {
   readonly #cartDisplay$ = new BehaviorSubject<UserCart | null>(null)
   readonly cartDisplay$ = this.#cartDisplay$.asObservable()
 
+  isCartCreated: boolean = false
+
   get cartDisplay(){
     return this.#cartDisplay$.value
   }
@@ -33,6 +35,8 @@ export class CartService {
 
   createCart(id: string, quantity: number){
     const token = this.auth.refreshToken
+    this.alert.toast('Product added', 'success', 'green')
+    localStorage.setItem('isCartCreated', JSON.stringify(true));
     if(token){
       const headers  = new HttpHeaders({
         'Authorization': `Bearer ${token}`,
@@ -64,9 +68,9 @@ export class CartService {
     }
   }
 
-  updateCart(id: string, quantity: number){
+  updateCart(id: string, quantity: number = +1){
     const token = this.auth.refreshToken
-
+    this.alert.toast('Product added', 'success', 'green')
     if(token){
       const headers = new HttpHeaders({
         'accept': 'application/json',
