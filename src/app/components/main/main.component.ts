@@ -9,6 +9,8 @@ import { SearchServiceService } from '../../shared/services/search-service.servi
 import { CartService } from '../../shared/services/cart.service';
 import { UserCart } from '../../shared/interface/cart';
 import { SweetAlertService } from '../../shared/services/sweet-alert.service';
+import { WishlistService } from '../../shared/services/wishlist.service';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-main',
@@ -23,6 +25,7 @@ export default class MainComponent implements OnInit  {
   private readonly searchService = inject(SearchServiceService)
   private readonly cartService = inject(CartService)
   private readonly alert = inject(SweetAlertService)
+  private readonly wishlist = inject(WishlistService)
 
   constructor(private changeDetector: ChangeDetectorRef){}
   
@@ -58,6 +61,8 @@ export default class MainComponent implements OnInit  {
       } else {
       this.passitemTrack = false;
     }
+
+    this.test()
   }
   
   searchFun(userSearch: string){
@@ -157,5 +162,16 @@ export default class MainComponent implements OnInit  {
         console.log(res)
       })
     }
+  }
+
+  addWishlist(product: Product){
+    this.wishlist.getWishlist(product)
+    this.test()
+  }
+
+  test(){
+    this.wishlist.savedItem$.pipe(tap(res => {
+      console.log(res)
+    })).subscribe()
   }
 }
