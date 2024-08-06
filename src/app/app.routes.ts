@@ -23,6 +23,11 @@ export const routes: Routes = [
         loadComponent: () => import('./components/cart-page/cart-page.component'),
         title: 'Cart Page'
     },
+    {
+        path: 'wishlist',
+        loadComponent: () => import('./components/wishlist-page/wishlist-page.component'),
+        title: 'Wishlist Page'
+    },
 
     {
         path: '**',

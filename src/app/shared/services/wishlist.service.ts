@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Product, Products } from '../interface';
 
@@ -37,10 +37,10 @@ export class WishlistService {
 
 
   getWishlist(product: Product){
-    this.savedItem = product
+    return this.savedItem = product
   }
 
   clearWishlist(){
-    this.savedItem = null;
+   return this.savedItem = null;
   }
 }

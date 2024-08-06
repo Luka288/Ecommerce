@@ -62,7 +62,6 @@ export default class MainComponent implements OnInit  {
       this.passitemTrack = false;
     }
 
-    this.test()
   }
   
   searchFun(userSearch: string){
@@ -166,12 +165,6 @@ export default class MainComponent implements OnInit  {
 
   addWishlist(product: Product){
     this.wishlist.getWishlist(product)
-    this.test()
   }
 
-  test(){
-    this.wishlist.savedItem$.pipe(tap(res => {
-      console.log(res)
-    })).subscribe()
-  }
 }

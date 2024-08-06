@@ -1,12 +1,35 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { WishlistService } from '../../shared/services/wishlist.service';
+import { CommonModule } from '@angular/common';
+import { Product } from '../../shared';
+import { take, tap } from 'rxjs';
 
 @Component({
   selector: 'app-wishlist-page',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './wishlist-page.component.html',
   styleUrl: './wishlist-page.component.scss'
 })
-export class WishlistPageComponent {
+export default class WishlistPageComponent implements OnInit {
+  private readonly wishlist = inject(WishlistService)
+
+
+  // readonly listenStream = this.wishlist.savedItem
+
+  ngOnInit(): void {
+    this.loadFromStream()
+  }
+
+  listenStream: Product[] = [];
+
+  loadFromStream(){
+    this.wishlist.savedItem$.pipe(tap((res)=>{
+      if(res){
+        this.listenStream = [res]
+        console.log(this.listenStream)
+      }
+    })).subscribe()
+  }
 
 }
