@@ -1,70 +1,95 @@
-<nav class="navbar bg-body bg-dark-subtle">
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <form class="d-flex" role="search">
-      <div class="searchWrap">
-        <input
-          class="form-control me-2"
-          type="search"
-          placeholder="Search"
-          aria-label="Search"
-          #searchvalue
-          (input)="onSearch($event)"
+    <a class="navbar-brand" routerLink="">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+        <path
+          d="M0 24C0 10.7 10.7 0 24 0L69.5 0c22 0 41.5 12.8 50.6 32l411 0c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3l-288.5 0 5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5L488 336c13.3 0 24 10.7 24 24s-10.7 24-24 24l-288.3 0c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5L24 48C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"
         />
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-          <path
-            fill="#616161"
-            d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"
-          />
-        </svg>
-        <div *ngIf="isDropdownVisible" class="searchDropdown">
-          <div *ngIf="searchResults && searchResults.length; else noResults">
-            <div *ngFor="let searchProduct of searchResults" class="searchItem">
-              <div class="text">
-                <p>{{ searchProduct.title }}</p>
-                @if (searchProduct.price.discountPercentage) {
-                <s class="discount">
-                  {{ searchProduct.price.beforeDiscount }}
-                </s>
-                <p>
-                  {{ searchProduct.price.current }}
-                  <span>{{ searchProduct.price.currency }}</span>
-                </p>
-                }@else {
-                <p>
-                  {{ searchProduct.price.current }}
-                  <span>{{ searchProduct.price.currency }}</span>
-                </p>
-                }
-              </div>
+      </svg>
+    </a>
 
-              <img
-                [src]="searchProduct.thumbnail"
-                [alt]="searchProduct.title"
-              />
-              <a
-                routerLink="/product/id/{{ searchProduct._id }}"
-                (click)="clearSearch()"
-                >View product</a
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarContent"
+      aria-controls="navbarContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarContent">
+      <form class="ms-auto" role="search">
+        <div class="searchWrap">
+          <input
+            class="form-control me-2"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+            #searchvalue
+            (input)="onSearch($event)"
+          />
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            <path
+              fill="#616161"
+              d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"
+            />
+          </svg>
+          <div *ngIf="isDropdownVisible" class="searchDropdown">
+            <div *ngIf="searchResults && searchResults.length; else noResults">
+              <div
+                *ngFor="let searchProduct of searchResults"
+                class="searchItem"
               >
+                <div class="text">
+                  <p>{{ searchProduct.title }}</p>
+                  @if (searchProduct.price.discountPercentage) {
+                  <s class="discount">
+                    {{ searchProduct.price.beforeDiscount }}
+                  </s>
+                  <p>
+                    {{ searchProduct.price.current }}
+                    <span>{{ searchProduct.price.currency }}</span>
+                  </p>
+                  }@else {
+                  <p>
+                    {{ searchProduct.price.current }}
+                    <span>{{ searchProduct.price.currency }}</span>
+                  </p>
+                  }
+                </div>
+
+                <img
+                  [src]="searchProduct.thumbnail"
+                  [alt]="searchProduct.title"
+                />
+                <a
+                  routerLink="/product/id/{{ searchProduct._id }}"
+                  (click)="clearSearch()"
+                  >View product</a
+                >
+              </div>
             </div>
+            <ng-template #noResults>
+              <p>No Products Found</p>
+            </ng-template>
           </div>
-          <ng-template #noResults>
-            <p>No Products Found</p>
-          </ng-template>
         </div>
+      </form>
+      <div class="sideA ms-lg-auto">
+        @if (user$ | async) { @for (item of afterAuth; track item.title) {
+        <a [routerLink]="item.path">
+          {{ item.title }}
+        </a>
+        }
+        <a (click)="logOut()">Log Out</a>
+        }@else { @for (item of beforeAuth; track item.title) {
+        <a [routerLink]="item.path">
+          {{ item.title }}
+        </a>
+        } }
       </div>
-    </form>
-    <div class="sideA">
-      @if (user$ | async) { @for (item of afterAuth; track item.title) {
-      <a [routerLink]="item.path">
-        {{ item.title }}
-      </a>
-      } <a (click)="logOut()">Log Out</a>}@else { @for (item of beforeAuth;
-      track item.title) {
-      <a [routerLink]="item.path">
-        {{ item.title }}
-      </a>
-      } }
     </div>
   </div>
 </nav>

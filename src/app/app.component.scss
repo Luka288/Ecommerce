@@ -7,6 +7,15 @@ nav {
   -webkit-box-shadow: 1px -1px 25px -3px rgba(0, 0, 0, 0.29);
   -moz-box-shadow: 1px -1px 25px -3px rgba(0, 0, 0, 0.29);
 
+  .navbar-brand {
+    a {
+      svg {
+        width: 100px;
+        height: 100px;
+      }
+    }
+  }
+
   .container-fluid {
     justify-content: space-around;
   }
@@ -82,6 +91,7 @@ nav {
 
     .sideA {
       display: flex;
+      justify-content: center;
       align-items: center;
       gap: 15px;
       a {
