@@ -167,4 +167,9 @@ export default class MainComponent implements OnInit  {
     this.wishlist.getWishlist(product)
   }
 
+  removeFromWishlist(index: number){
+    this.wishlist.removeItem(index)
+    this.alert.toast('Item removed', 'success', 'green')
+  }
+
 }

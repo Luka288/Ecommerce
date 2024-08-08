@@ -1,3 +1,4 @@
-<h1 *ngFor="let item of listenStream">
+<h1 *ngFor="let item of listenStream; let i = index">
   {{ item._id }}
+  <button (click)="removeWishlisted(i)">Remove Item</button>
 </h1>

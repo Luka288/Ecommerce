@@ -8,11 +8,10 @@ import { Product, Products } from '../interface';
 export class WishlistService {
 
 
-  private readonly _savedItem$ = new BehaviorSubject<Product | null>(null);
+  private readonly _savedItem$ = new BehaviorSubject<Product[]>([]);
   readonly savedItem$ = this._savedItem$.asObservable()
 
   constructor(){
-
     const getFromLocal = localStorage.getItem('Product')
 
     if(getFromLocal){
@@ -22,25 +21,40 @@ export class WishlistService {
   }
 
 
-  get savedItem(): Product | null{
+  get savedItem(): Product[] {
     return this._savedItem$.getValue()
   }
   
-  set savedItem(product: Product | null){
-    if(product){
-      localStorage.setItem('Product', JSON.stringify(product))
+  set savedItem(products: Product[]){
+    if(products){
+      localStorage.setItem('Product', JSON.stringify(products))
     }else{
       localStorage.removeItem('Product')
     }
-    this._savedItem$.next(product)
+    this._savedItem$.next(products);
   }
 
 
   getWishlist(product: Product){
-    return this.savedItem = product
+    const currentWishlist = this.savedItem;
+
+    let isAlreadyInWishlist = false;
+
+    for(const item of currentWishlist){
+      if(item._id === product._id){
+        isAlreadyInWishlist = true;
+        break
+      }
+    }
+
+
+    if (!isAlreadyInWishlist) {
+      this.savedItem = [...currentWishlist, product];
+    }
   }
 
-  clearWishlist(){
-   return this.savedItem = null;
+  removeItem(index: number){
+    this.savedItem.splice(index, 1)
+    this.savedItem = [...this.savedItem]
   }
 }

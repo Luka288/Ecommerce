@@ -3,6 +3,7 @@ import { WishlistService } from '../../shared/services/wishlist.service';
 import { CommonModule } from '@angular/common';
 import { Product } from '../../shared';
 import { take, tap } from 'rxjs';
+import { SweetAlertService } from '../../shared/services/sweet-alert.service';
 
 @Component({
   selector: 'app-wishlist-page',
@@ -13,6 +14,7 @@ import { take, tap } from 'rxjs';
 })
 export default class WishlistPageComponent implements OnInit {
   private readonly wishlist = inject(WishlistService)
+  private readonly alert = inject(SweetAlertService)
 
 
   // readonly listenStream = this.wishlist.savedItem
@@ -25,11 +27,16 @@ export default class WishlistPageComponent implements OnInit {
 
   loadFromStream(){
     this.wishlist.savedItem$.pipe(tap((res)=>{
-      if(res){
-        this.listenStream = [res]
-        console.log(this.listenStream)
+      if (res) {
+        this.listenStream = res;
+        console.log(this.listenStream);
       }
     })).subscribe()
+  }
+
+  removeWishlisted(index: number){
+    this.wishlist.removeItem(index)
+    this.alert.toast('Item removed', 'success', 'green')
   }
 
 }
