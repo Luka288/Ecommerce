@@ -1,17 +1,4 @@
-<!-- <h1 *ngFor="let item of listenStream; let i = index">
-  <img [src]="item.thumbnail" alt="" />
+<h1 *ngFor="let item of listenStream; let i = index">
+  {{ item._id }}
   <button (click)="removeWishlisted(i)">Remove Item</button>
-</h1> -->
-<main>
-  <section>
-    <div class="items" *ngIf="listenStream">
-      <div class="card1" *ngFor="let item of listenStream; let i = index">
-        <img [src]="item.thumbnail" [alt]="item.title" />
-        <h1>
-          {{ item.title }}
-        </h1>
-        <button (click)="removeWishlisted(i)">Remove Item</button>
-      </div>
-    </div>
-  </section>
-</main>
+</h1>

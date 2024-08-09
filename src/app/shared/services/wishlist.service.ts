@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Product, Products } from '../interface';
-import { SingleProduct } from '../interface/singleProduct';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +8,7 @@ import { SingleProduct } from '../interface/singleProduct';
 export class WishlistService {
 
 
-  private readonly _savedItem$ = new BehaviorSubject<SingleProduct[]>([]);
+  private readonly _savedItem$ = new BehaviorSubject<Product[]>([]);
   readonly savedItem$ = this._savedItem$.asObservable()
 
   constructor(){
@@ -22,11 +21,11 @@ export class WishlistService {
   }
 
 
-  get savedItem(): SingleProduct[] {
+  get savedItem(): Product[] {
     return this._savedItem$.getValue()
   }
   
-  set savedItem(products: SingleProduct[]){
+  set savedItem(products: Product[]){
     if(products){
       localStorage.setItem('Product', JSON.stringify(products))
     }else{
@@ -36,7 +35,7 @@ export class WishlistService {
   }
 
 
-  getWishlist(product: SingleProduct){
+  getWishlist(product: Product){
     const currentWishlist = this.savedItem;
 
     let isAlreadyInWishlist = false;

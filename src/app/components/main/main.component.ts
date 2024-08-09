@@ -11,7 +11,6 @@ import { UserCart } from '../../shared/interface/cart';
 import { SweetAlertService } from '../../shared/services/sweet-alert.service';
 import { WishlistService } from '../../shared/services/wishlist.service';
 import { tap } from 'rxjs';
-import { SingleProduct } from '../../shared/interface/singleProduct';
 
 @Component({
   selector: 'app-main',
@@ -164,7 +163,7 @@ export default class MainComponent implements OnInit  {
     }
   }
 
-  addWishlist(product: SingleProduct){
+  addWishlist(product: Product){
     this.wishlist.getWishlist(product)
   }
 
