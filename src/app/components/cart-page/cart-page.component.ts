@@ -18,6 +18,7 @@ export default class CartPageComponent implements OnInit {
   private readonly singleProductService = inject(SingleProductService)
   private readonly changeDetector = inject(ChangeDetectorRef)
   private readonly alerts = inject(SweetAlertService)
+  private readonly ref = inject(ChangeDetectorRef)
 
   forImg: SingleProduct | null = null;
   display: UserCart | null = null;

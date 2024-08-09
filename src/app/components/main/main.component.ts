@@ -18,6 +18,7 @@ import { tap } from 'rxjs';
   imports: [CommonModule, RouterModule, CommonModule],
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export default class MainComponent implements OnInit  {
   private readonly httpRequest = inject(ProductsService)
@@ -87,6 +88,7 @@ export default class MainComponent implements OnInit  {
       this.search.push(...res.products)
       this.config.totalItems = res.total
       this.isCategory= false
+      this.changeDetector.detectChanges()
     })
   }
 
@@ -128,7 +130,6 @@ export default class MainComponent implements OnInit  {
         console.log(res)
         console.log(this.passitemTrack)
         localStorage.setItem('passitemTrack', JSON.stringify(true));
-        this.changeDetector.detectChanges();
       })
     }
   }

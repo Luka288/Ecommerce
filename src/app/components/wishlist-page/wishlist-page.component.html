@@ -1,4 +1,35 @@
-<h1 *ngFor="let item of listenStream; let i = index">
-  {{ item._id }}
-  <button (click)="removeWishlisted(i)">Remove Item</button>
-</h1>
+<main>
+  <section *ngIf="listenStream">
+    @if (listenStream.length == 0) {
+    <img
+      src="https://lh6.googleusercontent.com/proxy/5TuO20js9k1n4Rz56mpP9YGJwkf6Pt5XLo1C47iwG1ipdla3ndeo738sDhhwshpLbwAaBao"
+      alt=""
+    />
+    }@else {
+    <div class="productSide">
+      <div class="itemCard" *ngFor="let product of listenStream; let i = index">
+        <div class="imgTitle">
+          <img [src]="product.thumbnail" alt="" />
+          <p>
+            {{ product.title }}
+          </p>
+        </div>
+        <div class="buttons">
+          <button class="removeButton" (click)="removeWishlisted(i)">
+            Remove Item
+          </button>
+          <button class="addTocart">Move To cart</button>
+        </div>
+      </div>
+    </div>
+    <div class="infoSide">
+      <div class="title" *ngIf="listenStream">
+        <h1>Total wishlisted items: {{ listenStream.length }}</h1>
+      </div>
+      <div class="upperSide" *ngFor="let item of listenStream">
+        <h1></h1>
+      </div>
+    </div>
+    }
+  </section>
+</main>
