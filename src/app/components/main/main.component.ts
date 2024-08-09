@@ -20,7 +20,6 @@ import { tap } from 'rxjs';
   imports: [CommonModule, RouterModule, CommonModule, NgxCubeLoaderComponent],
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export default class MainComponent implements OnInit  {
   private readonly httpRequest = inject(ProductsService)
