@@ -16,7 +16,7 @@ export const NavBar: nav[] = [
     },
     {
         title: 'Wishlist',
-        path: '',
+        path: 'wishlist',
     },
 ]
 
@@ -27,7 +27,7 @@ export const AfterAuth: nav[] = [
     },
     {
         title: "Wishlist",
-        path: '',
+        path: 'wishlist',
     },
 ]
 
@@ -47,7 +47,7 @@ export const BeforeAuth: nav[] = [
     },
     {
         title: 'Wishlist',
-        path: '',
+        path: 'wishlist',
     },
 ]
 
