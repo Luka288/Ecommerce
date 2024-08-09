@@ -1,4 +1,9 @@
 <main>
+  @if (isLoading) {
+  <div class="loading">
+    <ngx-cube-loader class="customLoader" colorSet="white"></ngx-cube-loader>
+  </div>
+  }@else {
   <section class="discountedProducts">
     <div class="discountedSection">
       <div class="title">
@@ -133,4 +138,5 @@
       </li>
     </ul>
   </nav>
+  }
 </main>

@@ -2,6 +2,8 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, in
 import { ProductsService } from '../../shared/services/products.service';
 import { Product, Products } from '../../shared';
 import { CommonModule } from '@angular/common';
+import { NgModule } from "@angular/core";
+import { NgxCubeLoaderComponent } from "ngx-cube-loader";
 
 import { RouterModule } from '@angular/router';
 import { CategoriesService } from '../../shared/services/categories.service';
@@ -15,7 +17,7 @@ import { tap } from 'rxjs';
 @Component({
   selector: 'app-main',
   standalone: true,
-  imports: [CommonModule, RouterModule, CommonModule],
+  imports: [CommonModule, RouterModule, CommonModule, NgxCubeLoaderComponent],
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -40,6 +42,7 @@ export default class MainComponent implements OnInit  {
   addedProduct: Product[] = []
 
   passitemTrack: boolean = false
+  isLoading: boolean = true;
 
 
   config = {
@@ -84,6 +87,7 @@ export default class MainComponent implements OnInit  {
 
   loadProducts(pageIndex: number, pageSize: number){
     this.httpRequest.getProducts(pageIndex, pageSize).subscribe((res) => {
+      this.isLoading = false
       this.display = res
       this.search.push(...res.products)
       this.config.totalItems = res.total
