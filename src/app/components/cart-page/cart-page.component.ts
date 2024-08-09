@@ -5,11 +5,12 @@ import { UserCart } from '../../shared/interface/cart';
 import { SingleProduct } from '../../shared/interface/singleProduct';
 import { SingleProductService } from '../../shared/services/single-product.service';
 import { SweetAlertService } from '../../shared/services/sweet-alert.service';
+import { NgxCubeLoaderComponent } from "ngx-cube-loader";
 
 @Component({
   selector: 'app-cart-page',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, NgxCubeLoaderComponent],
   templateUrl: './cart-page.component.html',
   styleUrl: './cart-page.component.scss',
 })
@@ -24,7 +25,7 @@ export default class CartPageComponent implements OnInit {
   display: UserCart | null = null;
   productThumbnails: { [key: string]: string } = {};
   titleSetMap: Map<string, string> = new Map();
-
+  isLoading: boolean = true;
 
   ngOnInit(): void {
     this.getProduct()
@@ -40,6 +41,7 @@ export default class CartPageComponent implements OnInit {
           this.changeDetector.markForCheck()
         });
       }
+      this.isLoading = false
     });
   }
 

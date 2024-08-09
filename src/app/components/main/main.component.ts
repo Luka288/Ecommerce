@@ -39,7 +39,6 @@ export default class MainComponent implements OnInit  {
   search: Product[] = []
   forSearch: Product[] | null = null;
   addedProduct: Product[] = []
-
   passitemTrack: boolean = false
   isLoading: boolean = true;
 

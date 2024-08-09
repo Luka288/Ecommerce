@@ -1,12 +1,13 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Injectable } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, inject, Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Product, Products } from '../interface';
+import { SweetAlertService } from './sweet-alert.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WishlistService {
-
+  private readonly alert = inject(SweetAlertService)
 
   private readonly _savedItem$ = new BehaviorSubject<Product[]>([]);
   readonly savedItem$ = this._savedItem$.asObservable()
@@ -43,14 +44,15 @@ export class WishlistService {
     for(const item of currentWishlist){
       if(item._id === product._id){
         isAlreadyInWishlist = true;
-        break
+        this.alert.toast('Item is already in wishlsit', 'error', 'red')
+        return
       }
     }
-
-
+    this.alert.toast('Item added', 'success', 'green')
     if (!isAlreadyInWishlist) {
       this.savedItem = [...currentWishlist, product];
     }
+
   }
 
   removeItem(index: number){

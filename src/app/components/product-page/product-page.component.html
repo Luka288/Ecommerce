@@ -29,7 +29,10 @@
               <img
                 [src]="imagePre"
                 alt=""
-                *ngFor="let imagePre of display.images; let i = index"
+                *ngFor="
+                  let imagePre of display.images.slice(0, 5);
+                  let i = index
+                "
                 (click)="imgSet(i)"
                 [class.mainImg]="i === index"
               />
@@ -69,7 +72,7 @@
             {{ display.brand }}
           </p>
           @if (display.stock === 0) {
-          <p class="OutOfStock">Out Of Stock</p>
+          <!-- <p class="OutOfStock">Out Of Stock</p> -->
           }@else {
           <p>Stock: {{ display.stock }}</p>
           }
@@ -95,7 +98,7 @@
               class="addTocart"
               (click)="addToCart(display._id, this.quantity + 1)"
             >
-              Add to cart
+              Out of stock
             </button>
             }@else {
             <button

@@ -2,6 +2,12 @@ main {
   width: 100%;
   height: 100%;
 
+  .loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   section.mainWrapper {
     padding-top: 3%;
     width: 100%;
