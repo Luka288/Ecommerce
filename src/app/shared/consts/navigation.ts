@@ -41,13 +41,5 @@ export const BeforeAuth: nav[] = [
         title: 'Register',
         path: 'auth',
     },
-    {
-        title: "Cart",
-        path: 'cart'
-    },
-    {
-        title: 'Wishlist',
-        path: 'wishlist',
-    },
 ]
 

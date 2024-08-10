@@ -21,12 +21,14 @@ export const routes: Routes = [
     {
         path: 'cart',
         loadComponent: () => import('./components/cart-page/cart-page.component'),
-        title: 'Cart Page'
+        title: 'Cart Page',
+        canActivate: [canActivate]
     },
     {
         path: 'wishlist',
         loadComponent: () => import('./components/wishlist-page/wishlist-page.component'),
-        title: 'Wishlist Page'
+        title: 'Wishlist Page',
+        canActivate: [canActivate]
     },
 
     {
