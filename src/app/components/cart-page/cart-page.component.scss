@@ -105,3 +105,29 @@ main {
     }
   }
 }
+
+@media (max-width: 425px) {
+  main {
+    .noItems {
+      width: 200px;
+    }
+    section.mainWrapper {
+      .purchaseSection {
+        position: fixed;
+        box-sizing: border-box;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 65px;
+        max-height: 65px;
+        z-index: 1100;
+
+        .upperSide {
+          flex-direction: row;
+          a {
+          }
+        }
+      }
+    }
+  }
+}
