@@ -250,6 +250,29 @@ main {
   }
 }
 
+@media (max-width: 768px) {
+  main {
+    section.shopProducts {
+      grid-template-columns: repeat(1, 0fr);
+
+      .upperContainer {
+        width: 100%;
+
+        .wrapper {
+          width: 485px;
+          .categories {
+            width: 485px;
+          }
+        }
+      }
+    }
+
+    .discountedProducts {
+      width: 100%;
+    }
+  }
+}
+
 @media (max-width: 425px) {
   .discountedProducts {
     .discountedSection {
@@ -261,6 +284,31 @@ main {
 
     .mainProducts {
       grid-template-columns: repeat(1, 1fr) !important;
+    }
+  }
+
+  main {
+    section.shopProducts {
+      grid-template-columns: repeat(1, 0fr);
+
+      .upperContainer {
+        width: 248px;
+
+        .wrapper {
+          width: 200px;
+          .categories {
+            width: 285px;
+          }
+        }
+      }
+    }
+
+    .mainProducts {
+      grid-template-columns: repeat(1, 0fr) !important;
+    }
+
+    .discountedProducts {
+      width: 100%;
     }
   }
 }
