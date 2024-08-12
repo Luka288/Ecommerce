@@ -6,7 +6,6 @@ nav {
   box-shadow: 1px -1px 25px -3px rgba(0, 0, 0, 0.29);
   -webkit-box-shadow: 1px -1px 25px -3px rgba(0, 0, 0, 0.29);
   -moz-box-shadow: 1px -1px 25px -3px rgba(0, 0, 0, 0.29);
-
   .navbar-brand {
     svg {
       width: 100px;
@@ -119,4 +118,8 @@ nav {
       }
     }
   }
+}
+main {
+  width: 100%;
+  height: 100%;
 }

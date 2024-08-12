@@ -3,24 +3,29 @@ main {
   height: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
+  padding-top: 5%;
   mat-tab-group {
-    width: 50%;
+    width: 35%;
+
+    ::ng-deep .mdc-tab__text-label {
+      color: black;
+    }
 
     form {
       display: flex;
+      justify-content: center;
       flex-direction: column;
-
-      .cart {
-        width: 50%;
-        border: 0.1px solid beige;
-        transition: 0.3s ease-in-out;
-      }
-
-      .cart:hover {
-        background-color: rgb(170, 169, 169);
-        transition: 0.3s ease-in-out;
-      }
     }
   }
+}
+.authBtn {
+  width: 150px;
+  height: 50px;
+  border: none;
+  border-radius: 25px;
+  transition: ease-in-out 0.4s;
+}
+.authBtn:hover {
+  background-color: aliceblue;
+  transition: ease-in-out 0.4s;
 }

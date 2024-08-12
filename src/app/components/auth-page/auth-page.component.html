@@ -34,7 +34,7 @@
           }
         </mat-form-field>
       </form>
-      <button class="cart" mat-flat-button (click)="login()">Login</button>
+      <button class="authBtn" mat-flat-button (click)="login()">Login</button>
     </mat-tab>
     <mat-tab label="Register">
       <form class="example-form" [formGroup]="signUpForm">
@@ -119,7 +119,7 @@
           <mat-error>Please enter more then 2 numbers</mat-error>
           }
         </mat-form-field>
-        <button class="cart" mat-flat-button (click)="register()">
+        <button class="authBtn" mat-flat-button (click)="register()">
           Register
         </button>
       </form>
