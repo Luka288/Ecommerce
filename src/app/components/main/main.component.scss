@@ -33,7 +33,7 @@ main {
       }
 
       .categories {
-        width: 250px;
+        // width: 250px;
         height: 350px;
         border-radius: 10px;
         box-shadow: 1px -1px 17px 1px rgba(0, 0, 0, 0.3);
@@ -91,7 +91,7 @@ main {
         width: 85%;
         display: grid;
         justify-content: center;
-        grid-template-columns: repeat(5, 0fr);
+        grid-template-columns: repeat(5, 1fr);
         border-bottom: 1px solid black;
 
         .discountedCard {
@@ -147,12 +147,12 @@ main {
   section.shopProducts {
     padding-top: 5%;
     width: 100%;
-    display: grid;
+    display: flex;
+    justify-content: center;
     justify-content: space-evenly;
-    grid-template-columns: repeat(2, 0fr);
+    grid-template-columns: repeat(2, 1fr);
 
     .mainProducts {
-      width: 85%;
       display: grid;
       justify-content: space-evenly;
       align-items: center;
@@ -235,80 +235,51 @@ main {
   }
 }
 
-@media (max-width: 1024px) {
-  .discountedProducts {
-    .discountedSection {
-      .sectionCards {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr) !important;
-      }
-    }
-  }
-
-  .mainProducts {
-    grid-template-columns: repeat(2, 1fr) !important;
-  }
-}
-
-@media (max-width: 768px) {
+@media screen and (max-width: 1440px) {
   main {
-    section.shopProducts {
-      grid-template-columns: repeat(1, 0fr);
-
-      .upperContainer {
-        width: 100%;
-
-        .wrapper {
-          width: 485px;
-          .categories {
-            width: 485px;
-          }
+    .discountedProducts {
+      .discountedSection {
+        .sectionCards {
+          grid-template-columns: repeat(3, 1fr);
         }
       }
     }
 
-    .discountedProducts {
-      width: 100%;
+    section.shopProducts {
+      .mainProducts {
+        grid-template-columns: repeat(3, 1fr);
+      }
     }
   }
 }
 
-@media (max-width: 425px) {
-  .discountedProducts {
-    .discountedSection {
-      .sectionCards {
-        display: grid;
-        grid-template-columns: repeat(1, 1fr) !important;
-      }
-    }
-
-    .mainProducts {
-      grid-template-columns: repeat(1, 1fr) !important;
-    }
-  }
-
+@media screen and (max-width: 1024px) {
   main {
-    section.shopProducts {
-      grid-template-columns: repeat(1, 0fr);
-
-      .upperContainer {
-        width: 248px;
-
-        .wrapper {
-          width: 200px;
-          .categories {
-            width: 285px;
-          }
+    .discountedProducts {
+      .discountedSection {
+        .sectionCards {
+          display: flex;
+          flex-wrap: wrap;
         }
       }
     }
 
-    .mainProducts {
-      grid-template-columns: repeat(1, 0fr) !important;
-    }
+    section.shopProducts {
+      display: flex;
+      flex-wrap: wrap;
 
-    .discountedProducts {
-      width: 100%;
+      .upperContainer {
+        .wrapper {
+          .categories {
+            width: 100%;
+          }
+        }
+      }
+
+      .mainProducts {
+        display: flex;
+        flex-wrap: wrap;
+      }
     }
   }
 }
