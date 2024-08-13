@@ -2,12 +2,15 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, inject, Injectable } from '
 import { BehaviorSubject } from 'rxjs';
 import { Product, Products } from '../interface';
 import { SweetAlertService } from './sweet-alert.service';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WishlistService {
   private readonly alert = inject(SweetAlertService)
+  private readonly auth = inject(AuthService)
+
 
   private readonly _savedItem$ = new BehaviorSubject<Product[]>([]);
   readonly savedItem$ = this._savedItem$.asObservable()
@@ -20,6 +23,8 @@ export class WishlistService {
     }
 
   }
+
+  readonly checkToken$ = this.auth.refreshToken
 
 
   get savedItem(): Product[] {
@@ -37,6 +42,10 @@ export class WishlistService {
 
 
   getWishlist(product: Product){
+    if(!this.checkToken$){
+      this.alert.toast("Sign up to access all features.", 'error', 'red ')
+      return
+    }
     const currentWishlist = this.savedItem;
 
     let isAlreadyInWishlist = false;

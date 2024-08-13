@@ -36,14 +36,17 @@ export class CartService {
 
   createCart(id: string, quantity: number){
     const token = this.auth.refreshToken
-    this.alert.toast('Product added', 'success', 'green')
     localStorage.setItem('isCartCreated', JSON.stringify(true));
+    if(!token){
+      this.alert.toast("Sign up now to enable cart functionality.", 'error', 'red')
+      return
+    }
     if(token){
       const headers  = new HttpHeaders({
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
       })
-      this.alert.toast('Added to cart', 'success', 'green')
+      this.alert.toast('Product added', 'success', 'green')
       return this.http.post<UserCart>(`${this.url}/shop/cart/product`, {id, quantity}, { headers })
     }else{
       console.log('error')
@@ -58,7 +61,8 @@ export class CartService {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
       });
-  
+      console.log(token)
+      this.alert.toast('Added to cart', 'success', 'green')
       return this.http.get<UserCart>(`${this.url}/shop/cart`, { headers }).pipe(
         tap((res) => {
           this.cartDisplay = res;
@@ -71,13 +75,17 @@ export class CartService {
 
   updateCart(id: string, quantity: number = +1){
     const token = this.auth.refreshToken
-    this.alert.toast('Product added', 'success', 'green')
+    if(!token){
+      this.alert.toast("Sign up now to enable cart functionality.", 'error', 'red')
+      return
+    }
     if(token){
       const headers = new HttpHeaders({
         'accept': 'application/json',
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
       })
+      this.alert.toast('Product added', 'success', 'green')
       return this.http.patch(`${this.url}/shop/cart/product`, {id, quantity}, {headers})
     }else{
       return null;

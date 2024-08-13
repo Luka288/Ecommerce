@@ -13,6 +13,7 @@ import { UserCart } from '../../shared/interface/cart';
 import { SweetAlertService } from '../../shared/services/sweet-alert.service';
 import { WishlistService } from '../../shared/services/wishlist.service';
 import { tap } from 'rxjs';
+import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
   selector: 'app-main',
@@ -28,6 +29,7 @@ export default class MainComponent implements OnInit  {
   private readonly cartService = inject(CartService)
   private readonly alert = inject(SweetAlertService)
   private readonly wishlist = inject(WishlistService)
+  private readonly auth = inject(AuthService)
 
   constructor(private changeDetector: ChangeDetectorRef){}
   
@@ -127,6 +129,10 @@ export default class MainComponent implements OnInit  {
 
   passItem(id: string, number: number) {
     const res = this.cartService.createCart(id, number)
+    if(!this.auth.accessToken){
+      console.log('return')
+      return
+    }
     if(res){
       res.subscribe((res)=> {
         console.log(res)
@@ -138,7 +144,10 @@ export default class MainComponent implements OnInit  {
 
   getItemCart(){
    const cart = this.cartService.getCart()
-
+   if(!this.auth.accessToken){
+    console.log('return')
+    return
+  }
     if(cart){
       cart.subscribe((res: UserCart)=> {
         console.log(res)
