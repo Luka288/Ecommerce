@@ -38,18 +38,19 @@ export default class ProductPageComponent implements OnInit {
           this.display = product
           //ვანიჭებთ პირველ ფოტოს მნიშვნელობას
           this.firstImg = product.images[0]
+          this.index = 0;
+          this.ref.detectChanges();
         });
       }
     });
   }
 
   //გადაგვაქ ფოტოს ინდექსი
-  imgSet(index: number){
-    if(this.display){
-      //ფოტოზე დაჭერის შემდეგ ფოტოს ინდექსით
-      //ხდება პირველი ფოტოს განახლება
+  imgSet(index: number): void {
+    if (this.display?.images) {
+      this.index = index;
       this.firstImg = this.display.images[index]
-      this.index = index
+      this.ref.detectChanges();
     }
   }
 

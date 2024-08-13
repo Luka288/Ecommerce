@@ -18,23 +18,24 @@
           <div id="carouselExample" class="carousel slide">
             <div class="carousel-inner">
               <div
-                class="carousel-item active"
                 *ngFor="let image of display?.images; let i = index"
-                [class.active]="i === 0"
+                [class.carousel-item]="true"
+                [class.active]="i === index"
               >
-                <img [src]="firstImg" [alt]="display.title" />
+                <img
+                  [src]="image"
+                  [alt]="display.title"
+                  class="d-block w-100"
+                />
               </div>
             </div>
-            <div class="imagePreview" *ngIf="display">
+            <div class="imagePreview">
               <img
-                [src]="imagePre"
-                alt=""
-                *ngFor="
-                  let imagePre of display.images.slice(0, 5);
-                  let i = index
-                "
+                *ngFor="let image of display?.images; let i = index"
+                [src]="image"
                 (click)="imgSet(i)"
                 [class.mainImg]="i === index"
+                alt=""
               />
             </div>
             <button
