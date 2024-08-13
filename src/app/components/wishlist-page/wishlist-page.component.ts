@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { WishlistService } from '../../shared/services/wishlist.service';
 import { CommonModule } from '@angular/common';
 import { Product } from '../../shared';
@@ -20,6 +20,7 @@ export default class WishlistPageComponent implements OnInit {
   private readonly alert = inject(SweetAlertService)
   private readonly productService = inject(SingleProductService)
   private readonly cartService = inject(CartService)
+  private readonly ref = inject(ChangeDetectorRef)
 
 
   // readonly listenStream = this.wishlist.savedItem
@@ -42,6 +43,7 @@ export default class WishlistPageComponent implements OnInit {
 
   removeWishlisted(index: number){
     this.wishlist.removeItem(index)
+    this.ref.markForCheck()
     this.alert.toast('Item removed', 'success', 'green')
   }
 
@@ -52,21 +54,20 @@ export default class WishlistPageComponent implements OnInit {
     )
   }
 
-  moveToCart(product: Product){
+  moveToCart(product: Product, prodI: number){
     if(product.stock == 0){
       this.alert.toast("We're currently out of stock on this product.", 'error', 'red')
       return
     }
     if(this.cartService.isCartCreated == false){
       this.cartService.updateCart(product._id)?.pipe(tap(res => {
+        this.removeWishlisted(prodI)
         console.log(res)
       })).subscribe()
     }else{
       this.cartService.createCart(product._id, 1)?.pipe(tap(res => {
         console.log(res)
-        if(product.stock === 0){
-          this.alert.toast("We're currently out of stock on this product.", 'error', 'red')
-        }
+        this.removeWishlisted(prodI)
       })).subscribe()
     }
   }
