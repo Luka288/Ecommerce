@@ -108,11 +108,8 @@
             >
               Out of stock
             </button>
-            <button
-              class="addTocart"
-              (click)="addToCart(display._id, this.quantity + 1)"
-            >
-              Add to cart
+            <button class="addTocart" (click)="addToWishlist(display)">
+              Add to Wishlist
             </button>
             }@else {
             <button class="addTocart" (click)="addToCart(display._id, 1)">
