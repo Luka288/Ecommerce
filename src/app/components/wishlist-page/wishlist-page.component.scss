@@ -11,6 +11,8 @@ main {
     align-items: center;
     .productSide {
       display: flex;
+      flex-wrap: wrap;
+      width: 50%;
       .itemCard {
         display: flex;
         background-color: #f8f8ff;
@@ -72,6 +74,40 @@ main {
       display: flex;
       justify-content: center;
       background-color: #f8dca8;
+    }
+  }
+}
+
+@media (max-width: 1440px) {
+  main {
+    section {
+      flex-wrap: wrap;
+      .productSide {
+      }
+      .infoSide {
+        position: fixed;
+        box-sizing: border-box;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 65px;
+        max-height: 65px;
+        z-index: 1100;
+      }
+    }
+  }
+}
+@media (max-width: 425px) {
+  main {
+    section {
+      display: block;
+      .productSide {
+        margin: 8%;
+        .itemCard {
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+      }
     }
   }
 }

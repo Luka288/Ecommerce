@@ -9,16 +9,22 @@ main {
   }
 
   section.mainWrapper {
-    padding-top: 3%;
+    padding-top: 10%;
     width: 100%;
     height: 100%;
     display: flex;
     justify-content: center;
 
+    .noItems {
+      height: 350px;
+    }
+
     .productsContainer {
-      width: 50%;
+      width: 35%;
+      height: auto;
       display: flex;
-      justify-content: center;
+      flex-wrap: wrap;
+      // justify-content: center;
       align-items: center;
       flex-direction: column;
       gap: 15px;
@@ -106,11 +112,35 @@ main {
   }
 }
 
+@media screen and (max-width: 1024px) {
+  main {
+    section.mainWrapper {
+      .purchaseSection {
+        position: fixed;
+        box-sizing: border-box;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 65px;
+        max-height: 65px;
+        z-index: 1100;
+
+        .upperSide {
+          flex-direction: row;
+          a {
+          }
+        }
+      }
+
+      .productsContainer {
+        width: 100%;
+      }
+    }
+  }
+}
+
 @media (max-width: 425px) {
   main {
-    .noItems {
-      width: 200px;
-    }
     section.mainWrapper {
       .purchaseSection {
         position: fixed;
