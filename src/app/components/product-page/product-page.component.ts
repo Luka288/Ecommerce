@@ -2,16 +2,18 @@ import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink, RouterModule } from '@angular/router';
 import { SingleProductService } from '../../shared/services/single-product.service';
-import { Products } from '../../shared';
+import { Product, Products } from '../../shared';
 import { SingleProduct } from '../../shared/interface/singleProduct';
 import { routes } from '../../app.routes';
 import { AppComponent } from '../../app.component';
 import { CartService } from '../../shared/services/cart.service';
+import { NgxCubeLoaderComponent } from 'ngx-cube-loader';
+import { WishlistService } from '../../shared/services/wishlist.service';
 
 @Component({
   selector: 'app-product-page',
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterModule],
+  imports: [CommonModule, RouterLink, RouterModule, NgxCubeLoaderComponent],
   templateUrl: './product-page.component.html',
   styleUrls: ['./product-page.component.scss']
 })
@@ -21,8 +23,9 @@ export default class ProductPageComponent implements OnInit {
   private readonly cart = inject(CartService)
   private readonly routes = inject(Router)
   private readonly ref = inject(ChangeDetectorRef)
+  private readonly wishlist = inject(WishlistService)
 
-  display: SingleProduct | null = null;
+  display: Product | null = null;
 
   quantity: number = 0;
 
@@ -49,7 +52,7 @@ export default class ProductPageComponent implements OnInit {
   imgSet(index: number): void {
     if (this.display?.images) {
       this.index = index;
-      this.firstImg = this.display.images[index]
+      // this.firstImg = this.display.images[index]
       this.ref.detectChanges();
     }
   }
@@ -68,5 +71,9 @@ export default class ProductPageComponent implements OnInit {
     this.cart.updateCart(id, quantity)?.subscribe((res) => {
       console.log(res)
     })
+  }
+
+  addToWishlist(product: Product){
+    this.wishlist.getWishlist(product)
   }
 }

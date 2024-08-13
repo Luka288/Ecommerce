@@ -9,7 +9,11 @@
     <div class="productSide">
       <div class="itemCard" *ngFor="let product of listenStream; let i = index">
         <div class="imgTitle">
-          <img [src]="product.thumbnail" alt="" />
+          <img
+            [src]="product.thumbnail"
+            alt=""
+            (click)="navigate(product._id)"
+          />
           <p>
             {{ product.title }}
           </p>

@@ -7,6 +7,7 @@ import { SweetAlertService } from '../../shared/services/sweet-alert.service';
 import { SingleProductService } from '../../shared/services/single-product.service';
 import { CartService } from '../../shared/services/cart.service';
 import { flush } from '@angular/core/testing';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-wishlist-page',
@@ -21,6 +22,7 @@ export default class WishlistPageComponent implements OnInit {
   private readonly productService = inject(SingleProductService)
   private readonly cartService = inject(CartService)
   private readonly ref = inject(ChangeDetectorRef)
+  private readonly router = inject(Router)
 
 
   // readonly listenStream = this.wishlist.savedItem
@@ -70,5 +72,9 @@ export default class WishlistPageComponent implements OnInit {
         this.removeWishlisted(prodI)
       })).subscribe()
     }
+  }
+
+  navigate(id: string){
+    this.router.navigateByUrl(`/product/id/${id}`)
   }
 }

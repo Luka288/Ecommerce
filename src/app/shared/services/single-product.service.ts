@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { apiURL } from '../consts';
 import { Observable } from 'rxjs';
-import { Products } from '../interface';
+import { Product, Products } from '../interface';
 import { SingleProduct } from '../interface/singleProduct';
 
 @Injectable({
@@ -13,7 +13,7 @@ export class SingleProductService {
 
   private readonly productURL = apiURL
 
-  loadProduct(_id: string): Observable<SingleProduct>{
-    return this.http.get<SingleProduct>(`${this.productURL}/shop/products/id/${_id}`)
+  loadProduct(_id: string): Observable<Product>{
+    return this.http.get<Product>(`${this.productURL}/shop/products/id/${_id}`)
   }
 }

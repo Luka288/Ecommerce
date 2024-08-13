@@ -1,4 +1,8 @@
 <main>
+  @if (!display) {
+  <ngx-cube-loader class="customLoader" colorSet="cyan"></ngx-cube-loader>
+  <h1>LOADING...</h1>
+  }@else {
   <div class="backArrow">
     <a routerLink="">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -31,7 +35,10 @@
             </div>
             <div class="imagePreview">
               <img
-                *ngFor="let image of display?.images; let i = index"
+                *ngFor="
+                  let image of display?.images?.slice(0, 5);
+                  let i = index
+                "
                 [src]="image"
                 (click)="imgSet(i)"
                 [class.mainImg]="i === index"
@@ -101,12 +108,18 @@
             >
               Out of stock
             </button>
-            }@else {
             <button
               class="addTocart"
               (click)="addToCart(display._id, this.quantity + 1)"
             >
               Add to cart
+            </button>
+            }@else {
+            <button class="addTocart" (click)="addToCart(display._id, 1)">
+              Add to Cart
+            </button>
+            <button class="addTocart" (click)="addToWishlist(display)">
+              Add to Wishlist
             </button>
             }
           </div>
@@ -114,5 +127,5 @@
       </div>
     </div>
   </section>
-  <section class="test" *ngIf="display"></section>
+  }
 </main>
