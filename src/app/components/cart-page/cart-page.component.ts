@@ -55,7 +55,6 @@ export default class CartPageComponent implements OnInit {
 
   removeOneItem(id: string){
     this.cart.deleteItem(id)?.subscribe((res) => {
-      this.changeDetector.markForCheck()
       this.alerts.toast('Item removed', 'success', 'green')
       this.getProduct()
       console.log(res)

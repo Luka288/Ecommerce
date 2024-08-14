@@ -3,6 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import { Product, Products } from '../interface';
 import { SweetAlertService } from './sweet-alert.service';
 import { AuthService } from './auth.service';
+import { LocalStorageKeys } from '../enums';
 
 @Injectable({
   providedIn: 'root'
@@ -42,7 +43,8 @@ export class WishlistService {
 
 
   getWishlist(product: Product){
-    if(!this.checkToken$){
+    const token = localStorage.getItem(LocalStorageKeys.AccessToken)
+    if(!token){
       this.alert.toast("Sign up to access all features.", 'error', 'red ')
       return
     }

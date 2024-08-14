@@ -31,6 +31,7 @@ export default class WishlistPageComponent implements OnInit {
     this.loadFromStream()
   }
 
+
   listenStream: Product[] = [];
 
   loadFromStream(){
@@ -73,6 +74,7 @@ export default class WishlistPageComponent implements OnInit {
       })).subscribe()
     }
   }
+
 
   navigate(id: string){
     this.router.navigateByUrl(`/product/id/${id}`)

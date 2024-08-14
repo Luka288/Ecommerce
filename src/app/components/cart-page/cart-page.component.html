@@ -14,7 +14,7 @@
     />
     }@else {
     <div *ngIf="display" class="productsContainer">
-      <div class="items" *ngFor="let item of display.products">
+      <div class="items" *ngFor="let item of display.products; let i = index">
         <img
           [src]="productThumbnails[item.productId]"
           alt=""
