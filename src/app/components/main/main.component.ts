@@ -129,10 +129,6 @@ export default class MainComponent implements OnInit  {
 
   passItem(id: string, number: number) {
     const res = this.cartService.createCart(id, number)
-    if(!this.auth.accessToken){
-      console.log('return')
-      return
-    }
     if(res){
       res.subscribe((res)=> {
         console.log(res)
@@ -168,10 +164,10 @@ export default class MainComponent implements OnInit  {
   updateCart(id: string, number: number){
     const update = this.cartService.updateCart(id, number);
     if(update){
-      update.subscribe((res) => {
-        console.log('updating')
-        console.log(res)
-      })
+        update.subscribe((res) => {
+          console.log('updating')
+          console.log(res)
+        })
     }
   }
 

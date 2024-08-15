@@ -36,11 +36,11 @@ export class CartService {
 
   createCart(id: string, quantity: number){
     const token = this.auth.refreshToken
-    localStorage.setItem('isCartCreated', JSON.stringify(true));
-    if(!token){
-      this.alert.toast("Sign up now to enable cart functionality.", 'error', 'red')
-      return
-    }
+    // localStorage.setItem('isCartCreated', JSON.stringify(true));
+    // if(!token){
+    //   this.alert.toast("Sign up now to enable cart functionality.", 'error', 'red')
+    //   return
+    // }
     if(token){
       const headers  = new HttpHeaders({
         'Authorization': `Bearer ${token}`,
