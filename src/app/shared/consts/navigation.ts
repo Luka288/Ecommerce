@@ -22,6 +22,10 @@ export const NavBar: nav[] = [
 
 export const AfterAuth: nav[] = [
     {
+        title: 'Profile',
+        path: 'profile'
+    },
+    {
         title: "Cart",
         path: 'cart',
     },

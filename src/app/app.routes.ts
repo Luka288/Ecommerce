@@ -30,6 +30,12 @@ export const routes: Routes = [
         title: 'Wishlist Page',
         canActivate: [canActivate]
     },
+    {
+        path: 'profile',
+        loadComponent: () => import('./components/profile/profile.component'),
+        title: 'Profile Page',
+        canActivate: [canActivate]
+    },
 
     {
         path: '**',

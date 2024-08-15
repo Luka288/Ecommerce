@@ -82,6 +82,7 @@ export default  class AuthPageComponent {
       if(user._id){
         this.alerts.alert('success', 'success', 'success')
         this.tabIndex = 0;
+        //verify turned off
         // this.verifyAsUser(user.email)
       }
       this.signUpForm.reset()
