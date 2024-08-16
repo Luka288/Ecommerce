@@ -1,28 +1,30 @@
-<main>
+<main *ngIf="profileInfo">
   <section class="upperSection">
-    <div class="image"></div>
     <div class="title">
-      <img src="https://zoommer.ge/icons/profile-icon.svg" alt="" />
+      <img [src]="profileInfo.avatar" alt="" />
       <h1>Hello USER</h1>
     </div>
   </section>
 
   <section class="userInfo">
     <div class="wrapper">
-      <p>user _id</p>
-      <p>name</p>
-      <p>last name</p>
-      <p>email</p>
-      <p>address</p>
-      <p>role</p>
-      <p>zipcode</p>
-      <p>gender</p>
-      <p>phone</p>
-      <p>is user verifyed</p>
+      <p>User ID: {{ profileInfo._id }}</p>
+      <p>First name: {{ profileInfo.firstName }}</p>
+      <p>Last name {{ profileInfo.lastName }}</p>
+      <p>Email: {{ profileInfo.email }}</p>
+      <p>Gender: {{ profileInfo.gender }}</p>
+      <p>Phone: {{ profileInfo.phone }}</p>
     </div>
     <div class="wishCart">
-      <p>Wishlisted items 0</p>
+      @if (items.length == null) {
+      <p>Wishlisted items: 0</p>
+      }@else {
+      <p>Wishlisted items: {{ items.length }}</p>
+      } @if (cartItems == null) {
       <p>On cart items 0</p>
+      }@else {
+      <p>On cart items {{ cartItems.total.quantity }}</p>
+      }
     </div>
   </section>
 </main>
