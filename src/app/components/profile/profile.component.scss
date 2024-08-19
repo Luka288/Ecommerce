@@ -4,9 +4,13 @@ main {
   align-items: center;
   flex-direction: column;
   flex-wrap: wrap;
-  padding-top: 3%;
+  padding: 4% 0;
   .upperSection {
-    width: 100%;
+    width: 85%;
+    padding: 15px 25px;
+    border-left: 4px solid #28a745;
+    margin-bottom: 25px;
+    border-radius: 5px;
     display: flex;
     align-items: center;
     gap: 15px;
@@ -14,19 +18,44 @@ main {
     .title {
       display: flex;
       align-items: center;
+      h1 {
+        font-size: 1.8rem;
+        color: #343a40;
+      }
       img {
         width: 50px;
         height: 50px;
+        object-fit: cover;
       }
     }
   }
 
   .userInfo {
-    width: 50%;
+    width: 85%;
+    padding: 20px 30px;
+    border-radius: 5px;
+    background-color: #ffffff;
+    border-left: 4px solid #007bff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+    .wrapper {
+      margin-bottom: 20px;
+      P {
+        font-size: 1.1rem;
+        margin-bottom: 12px;
+        line-height: 1.6;
+        color: #495057;
+      }
+    }
 
     .wishCart {
       display: flex;
-      justify-content: space-evenly;
+      justify-content: space-around;
+
+      P {
+        font-size: 1.1rem;
+        color: #212529;
+      }
     }
   }
 }
