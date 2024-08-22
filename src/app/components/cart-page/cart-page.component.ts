@@ -6,6 +6,7 @@ import { SingleProduct } from '../../shared/interface/singleProduct';
 import { SingleProductService } from '../../shared/services/single-product.service';
 import { SweetAlertService } from '../../shared/services/sweet-alert.service';
 import { NgxCubeLoaderComponent } from "ngx-cube-loader";
+import { catchError, tap } from 'rxjs';
 
 @Component({
   selector: 'app-cart-page',
@@ -26,24 +27,38 @@ export default class CartPageComponent implements OnInit {
   productThumbnails: { [key: string]: string } = {};
   titleSetMap: Map<string, string> = new Map();
   isLoading: boolean = true;
+  checkVerify: boolean = false;
 
   ngOnInit(): void {
     this.getProduct()
   }
 
   getProduct() {
-    this.cart.getCart()?.subscribe((res) => {
-      this.display = res;
-      if (this.display?.products.length) {
-        this.titleSetMap.clear()
-        this.display.products.forEach(product => {
-          this.getImg(product.productId);
-          this.changeDetector.markForCheck()
-        });
-      }
-      this.isLoading = false
-    });
+    this.cart.getCart()?.pipe(
+      tap(res => {
+        this.display = res;
+        if (this.display?.products.length) {
+          this.titleSetMap.clear();
+          this.display.products.forEach(product => {
+            this.getImg(product.productId);
+          });
+          this.changeDetector.markForCheck();
+        }
+        this.checkVerify = true;
+        this.isLoading = false;
+      }),
+      catchError(err => {
+        console.log('Error', err.error.error)
+        if(err.error.error === 'User needs to verify email' ){
+          this.checkVerify = false
+          this.isLoading = false
+        }
+        return 'error'
+      })
+    ).subscribe();
   }
+  
+
 
   getImg(productid: string) {
     this.singleProductService.loadProduct(productid).subscribe((res) => {

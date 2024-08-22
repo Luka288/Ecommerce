@@ -4,7 +4,11 @@
     <ngx-cube-loader class="customLoader" colorSet="cyan"></ngx-cube-loader>
     <h1>LOADING...</h1>
   </div>
-  }@else {
+  }@else if (!checkVerify) {
+  <div class="verify" *ngIf="!checkVerify">
+    <h1>You must verify your email first</h1>
+  </div>
+  } @else {
   <section class="mainWrapper">
     @if (!display || !display.products.length) {
     <img
