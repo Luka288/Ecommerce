@@ -36,7 +36,6 @@ export const routes: Routes = [
         title: 'Profile Page',
         canActivate: [canActivate]
     },
-
     {
         path: '**',
         loadComponent: () => import('./components/not-found/not-found.component'),

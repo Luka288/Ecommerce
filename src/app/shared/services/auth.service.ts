@@ -9,6 +9,7 @@ import { LocalStorageKeys } from '../enums';
 import { SweetAlertService } from './sweet-alert.service';
 import { ActivatedRouteSnapshot, CanActivateChildFn, CanActivateFn, Router, RouterStateSnapshot } from '@angular/router';
 import { routes } from '../../app.routes';
+import { VerifyEmail } from '../interface/emailVerify';
 
 @Injectable({
   providedIn: 'root'
@@ -84,7 +85,7 @@ export class AuthService {
   }
 
   verifyEmail(email: string){
-    return this.http.post(`${this.authAPI}/auth/verify_email`, email)
+    return this.http.post<VerifyEmail>(`${this.authAPI}/auth/verify_email`, email)
   }
 
   isUserAuth(){

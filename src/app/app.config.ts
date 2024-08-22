@@ -6,6 +6,7 @@ import { provideHttpClient, withFetch } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { apiURL } from './shared';
 import { JwtModule } from '@auth0/angular-jwt';
+import AuthPageComponent from './components/auth-page/auth-page.component';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideHttpClient(withFetch()), provideAnimationsAsync(), provideAnimationsAsync(),

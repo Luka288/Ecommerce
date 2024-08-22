@@ -1,12 +1,13 @@
-<main *ngIf="profileInfo">
-  <section class="upperSection">
+<main>
+  @if (checkVerify) {
+  <section class="upperSection" *ngIf="profileInfo">
     <div class="title">
       <img [src]="profileInfo.avatar" alt="" />
       <h1>Hello {{ profileInfo.firstName }}</h1>
     </div>
   </section>
 
-  <section class="userInfo">
+  <section class="userInfo" *ngIf="profileInfo">
     <div class="wrapper">
       <p>User ID: {{ profileInfo._id }}</p>
       <p>First name: {{ profileInfo.firstName }}</p>
@@ -27,4 +28,9 @@
       }
     </div>
   </section>
+  }@else {
+  <section class="verify">
+    <h1>You must verify email first Check Email</h1>
+  </section>
+  }
 </main>

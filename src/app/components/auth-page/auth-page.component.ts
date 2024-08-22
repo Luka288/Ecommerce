@@ -7,9 +7,10 @@ import { AuthInterface } from '../../shared/interface/auth';
 import { MatInputModule } from '@angular/material/input';
 import { UserAvatar } from '../../shared';
 import { MatTabsModule } from '@angular/material/tabs';
-import { catchError, empty, EMPTY, tap } from 'rxjs';
+import { BehaviorSubject, catchError, empty, EMPTY, tap } from 'rxjs';
 import { SweetAlertService } from '../../shared/services/sweet-alert.service';
 import { routes } from '../../app.routes';
+import { MAT_SORT_HEADER_INTL_PROVIDER_FACTORY } from '@angular/material/sort';
 
 @Component({
   selector: 'app-auth-page',
@@ -24,6 +25,9 @@ export default  class AuthPageComponent {
   private readonly alerts = inject(SweetAlertService)
   private readonly route = inject(Router)
 
+
+  readonly #checkVerify$ = new BehaviorSubject<boolean>(false);
+  checkVerify$ = this.#checkVerify$.asObservable();
 
 
     private readonly userAvatar = UserAvatar;
@@ -41,11 +45,11 @@ export default  class AuthPageComponent {
       Validators.minLength(2),
       Validators.maxLength(16),
     ]),
-    email: new FormControl('lukagaxokidze28@gmail.com', [
+    email: new FormControl('', [
       Validators.required,
       Validators.email,
     ]),
-    password: new FormControl('niniko787', [
+    password: new FormControl('', [
       Validators.required,
       Validators.minLength(8),
       Validators.maxLength(16),
@@ -73,25 +77,17 @@ export default  class AuthPageComponent {
     user.avatar = `${this.userAvatar}${user.firstName}`
     this.tabIndex = 1;
 
-    if(!user._id){
-      this.alerts.toast("Wrong", 'error', 'no');
-      return
-    }
-
     this.authService.register(user).pipe(tap(user => {
       if(user._id){
         this.alerts.alert('success', 'success', 'success')
         this.tabIndex = 0;
-        //verify turned off
-        // this.verifyAsUser(user.email)
+        //verify turned on
+        console.log(user)
+        console.log('ae')
+        this.verifyAsUser(user.email)
       }
       this.signUpForm.reset()
-      console.log(user)
     })).subscribe()
-    
-
-
-
   }
  
   login(){
@@ -117,8 +113,6 @@ export default  class AuthPageComponent {
   verifyAsUser(email: string){
     this.authService.verifyEmail(email).subscribe((res) => {
       this.alerts.alert('Check your email to verify as user', 'warning', 'Check email and make sure that you are verifyed to make purchases')
-      console.log('sending verify ')
-      console.log(res)
     })
   }
 }
