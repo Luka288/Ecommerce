@@ -1,0 +1,1 @@
+import{aa as s,p as o}from"./chunk-OEXLNGRT.js";var n=(()=>{let r=class r{constructor(){this.searchQuerySource=new o(""),this.searchQuery$=this.searchQuerySource.asObservable()}setSearchQuery(e){this.searchQuerySource.next(e)}};r.\u0275fac=function(c){return new(c||r)},r.\u0275prov=s({token:r,factory:r.\u0275fac,providedIn:"root"});let t=r;return t})();export{n as a};
